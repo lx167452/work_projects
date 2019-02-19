@@ -1,0 +1,84 @@
+.container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: auto;
+    background: #fff;
+}
+
+.container .menu_cell {
+    height: 66rpx;
+    line-height: 66rpx;
+    display: flex;
+}
+
+.container .menu_cell_title {
+    font-size: 28rpx;
+    margin-left: 30rpx;
+    width: 130rpx;
+}
+
+.container .menu_cell_bar {
+    display: flex;
+}
+
+.container .select_items {
+    width: 452rpx;
+    border: 2rpx solid #BABABA;
+    display: flex;
+    position: relative;
+}
+
+.container .menu_cell_bar .item_cell {
+    width: 452rpx;
+    font-size: 26rpx;
+    text-indent: 18rpx;
+    position: relative;
+    top: -1rpx;
+    overflow: hidden;
+}
+
+.container .triangle_icons {
+    width: 46rpx;
+    height: 46rpx;
+    background: url("http://files.nacy.cc/triangle_icons.png") no-repeat;
+    background-size: contain;
+    position: absolute;
+    right: 0;
+    top: 8rpx;
+    background-color: #fff;
+}
+
+.username {
+    display: flex;
+    padding: 30rpx;
+    font-size: 30rpx;
+    margin-top: 18rpx;
+}
+
+.cell_item {
+    background: #F2F2F2;
+    width: 82%;
+    margin: 46rpx auto 0rpx;
+}
+
+.cell_item .cell_title {
+    padding: 10rpx 30rpx;
+    font-size: 30rpx;
+    color: #000;
+}
+
+.cell_item .cell_text {
+    text-align: center;
+    padding: 90rpx;
+    font-size: 30rpx;
+}
+
+.statistics {
+    text-align: center;
+    font-size: 30rpx;
+    color: #333333;
+    margin-top: 68rpx;
+}

@@ -1,0 +1,20 @@
+{
+    "pages": [
+        "pages/page1/index",
+        "pages/page2/index",
+        "pages/page3/index",
+        "pages/page4/index",
+        "pages/page5/index",
+        "pages/page6/index",
+        "pages/authorize/index"
+
+    ],
+    "window": {
+        "navigationBarBackgroundColor": "#f7f7f8",
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "Wux",
+        "backgroundColor": "#efeff4",
+        "backgroundTextStyle": "dark"
+    },
+    "debug": true
+}

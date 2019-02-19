@@ -1,0 +1,248 @@
+<view class="container">
+    <!-- 服役年限 -->
+    <view class="menu_cell">
+        <view class="menu_cell_title">服役年限</view>
+        <view class="menu_cell_bar">
+            <!-- 服役年限开始时间 -->
+            <view class="select_items">
+                <picker class="item_cell" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    {{array[index]}}
+                </picker>
+                <view class="triangle_icons"></view>
+            </view>
+            <view class="to_txt">到</view>
+            <!-- 服役年限结束时间 -->
+            <view class="select_items">
+                <picker class="item_cell" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    {{array[index]}}
+                </picker>
+                <view class="triangle_icons"></view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 职务 -->
+    <view class="item_cell_box">
+        <view class="menu_cell_title">职
+            <view class="interval">占位</view>务
+        </view>
+        <view class="menu_cell_list">
+            <view class="cell_item_bar">
+                <view class="cell_item_title">行政职务</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+            <view class="cell_item_bar">
+                <view class="cell_item_title">专业技术</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+            <view class="cell_item_bar">
+                <view class="cell_item_title">领导职务</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+                <text class="tips_txt">说明：副团职且二年以上</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- 奖励计分 -->
+    <view class="item_cell_box">
+        <view class="menu_cell_title">奖励计分</view>
+        <view class="menu_cell_list">
+            <view class="cell_item_bar">
+                <view class="cell_item_title width314">中央军委授予荣誉称号</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+            <view class="cell_item_bar">
+                <view class="cell_item_title width314">大军区级荣誉称号或一等功</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+            <view class="cell_item_bar">
+                <view class="cell_item_title">二等功</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+            <view class="cell_item_bar">
+                <view class="cell_item_title">三等功</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 惩处扣分 -->
+    <view class="item_cell_box">
+        <view class="menu_cell_title">惩处扣分</view>
+        <view class="menu_cell_list">
+            <view class="cell_item_bar">
+                <view class="cell_item_title width156">处分类型</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+            <view class="cell_item_bar">
+                <view class="cell_item_title width156">直接录入扣分</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 学历 -->
+    <view class="item_cell_box">
+        <view class="menu_cell_title">学
+            <view class="interval">占位</view>历</view>
+        <view class="menu_cell_list">
+            <view class="cell_item_bar">
+                <view class="cell_item_title width132">最高学历</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        高中及以下
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+            <view class="cell_item_bar">
+                <view class="cell_item_title width132">入伍前学历</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        高中及以下
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 边远艰苦地区年限 -->
+    <view class="item_cell_box">
+        <view class="menu_cell_title width242">边远艰苦地区年限</view>
+        <view class="menu_cell_list">
+            <view class="cell_item_bar">
+                <view class="cell_item_title width328">三类边远艰苦地区(三类岛)</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+            <view class="cell_item_bar">
+                <view class="cell_item_title width328">四类边远艰苦地区(海拔2500米至3500米、二类岛服役)</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+            <view class="cell_item_bar">
+                <view class="cell_item_title width328">五类边远艰苦地区(海拔3500米至4500米、一类岛服役)</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+            <view class="cell_item_bar">
+                <view class="cell_item_title width328">六类边远艰苦地区(海拔4500米以上地区、特类岛)</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 特殊岗位年限 -->
+    <view class="item_cell_box">
+        <view class="menu_cell_title width190">特殊岗位年限</view>
+        <view class="menu_cell_list">
+            <view class="cell_item_bar">
+                <view class="cell_item_title">飞行</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+            <view class="cell_item_bar">
+                <view class="cell_item_title">舰艇</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+            <view class="cell_item_bar">
+                <view class="cell_item_title">涉核</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 滞留扣分 -->
+    <view class="item_cell_box">
+        <view class="menu_cell_title">滞留扣分</view>
+        <view class="menu_cell_list">
+            <view class="cell_item_bar">
+                <view class="cell_item_title">个人原因不报到</view>
+                <view class="cell_item">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        无
+                    </picker>
+                    <view class="triangle_icons"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="sub_btn">提交</view>
+</view>

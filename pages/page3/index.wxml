@@ -1,0 +1,28 @@
+<view class="container">
+    <view class="input_item">
+        <view class="item_text">姓名</view>
+        <view class="input_bar">
+            <input class="username" type="text" placeholder="请输入姓名" maxlength="140" focus="true" bindinput="" />
+        </view>
+    </view>
+    <view class="input_item">
+        <view class="item_text">电话</view>
+        <view class="input_bar">
+            <input class="username" type="number" placeholder="请输入电话" maxlength="140" focus="true" bindinput="" />
+        </view>
+    </view>
+    <!-- 安置地点 -->
+    <view class="menu_cell">
+        <view class="menu_cell_title">安置地点</view>
+        <view class="menu_cell_bar">
+            <view class="select_items">
+                <picker class="item_cell" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    武汉地区
+                </picker>
+                <view class="triangle_icons"></view>
+            </view>
+        </view>
+    </view>
+    <view class="sub_btn">确认提交数据并查看</view>
+    <view class="tips_text">为保证平台数据的真实性，请输入真实姓名和电话，安置地点，否则您无将法查看综合成绩排名。</view>
+</view>

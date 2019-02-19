@@ -1,0 +1,35 @@
+.bg_activity_rules {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 2;
+}
+
+.bg_activity_rules .text {
+    width: 600rpx;
+    padding-top: 360rpx;
+    margin: 0 auto;
+    font-size: 30rpx;
+    color: #333;
+    line-height: 45rpx;
+}
+
+.bg_activity_rules .text .icon {
+    float: left;
+    display: block;
+    width: 70rpx;
+    height: 84rpx;
+    margin-right: 16rpx;
+}
+
+.bg_activity_rules .btn {
+    width: 600rpx;
+    height: 88rpx;
+    margin: 180rpx auto 0;
+    text-align: center;
+    color: #fff;
+    background-color: #1aac19;
+    border: 1px solid #1aac19;
+    font-size: 34rpx;
+}

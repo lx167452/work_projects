@@ -1,0 +1,7 @@
+<view class="bg_activity_rules">
+    <view class="text">
+        <image class="icon" src="../../assets/images/authorize.png" mode="scaleToFill"></image>
+        需要您授权获取您的公开信息(昵称、头像等）
+    </view>
+    <button class="btn" open-type="getUserInfo" bind:getuserinfo="getuserInfoFn"> 授权登录</button>
+</view>

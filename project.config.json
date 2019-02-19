@@ -1,0 +1,82 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"nodeModules": true,
+		"autoAudits": false,
+		"uglifyFileName": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.2.3",
+	"appid": "wx4dfda7f2f62be16d",
+	"projectname": "example",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 5,
+			"list": [
+				{
+					"id": -1,
+					"name": "page1",
+					"pathName": "pages/page1/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "page2",
+					"pathName": "pages/page2/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "page3",
+					"pathName": "pages/page3/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "page4",
+					"pathName": "pages/page4/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "page5",
+					"pathName": "pages/page5/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "page6",
+					"pathName": "pages/page6/index",
+					"scene": null
+				}
+			]
+		}
+	}
+}

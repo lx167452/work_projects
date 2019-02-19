@@ -1,0 +1,16 @@
+<view class="container">
+    <view class="title">请录入您的文化考试成绩</view>
+    <view class="input_item">
+        <view class="item_text">行测</view>
+        <view class="input_bar">
+            <input class="username" type="text" placeholder="请输入您的行测成绩" maxlength="140" focus="true" bindinput="" />
+        </view>
+    </view>
+    <view class="input_item">
+        <view class="item_text">申论</view>
+        <view class="input_bar">
+            <input class="username" type="text" placeholder="请输入您的申论成绩" maxlength="140" focus="true" bindinput="" />
+        </view>
+    </view>
+    <view class="sub_btn">确认提交数据并查看</view>
+</view>
