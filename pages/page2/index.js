@@ -39,7 +39,7 @@ Page({
 
         service_length: { // 服役年限
             start_time: "1970-01-01", // 开始时间
-            end_time: "2018-08-28" // 结束时间
+            end_time: "" // 结束时间
         },
         post: { // 职务
             administration_post: [], // 行政职务
@@ -278,8 +278,40 @@ Page({
     onShow: function() {
         let that = this;
         App._post('api/index/getList', {}, function(result) {
-            console.log('success');
-            console.log(result);
+            if (result.code == 1) {
+                console.log('success');
+                that.setData({
+                    'service_length.start_time': result.data.start_time, // 开始时间 (服役年限)
+                    'service_length.end_time': result.data.end_time, // 结束时间 (服役年限)
+
+                    'post.administration_post': result.data.administration_post, // 行政职务 (职务)
+                    'post.expertise': result.data.expertise, // 专业技术 (职务)
+                    'post.leading_post': result.data.leading_post, // 领导职务 (职务)
+
+                    'bonus_score.crack_glory': result.data.crack_glory, // 中央军委授予荣誉称号 (奖励计分)
+                    'bonus_score.one_glory': result.data.crack_glory, // 大军区级荣誉称号或一等功 (奖励计分)
+                    'bonus_score.two_glory': result.data.crack_glory, // 二等功 (奖励计分)
+                    'bonus_score.three_glory': result.data.crack_glory, // 三等功 (奖励计分)
+
+                    'penalty_deduction.disposition_type': result.data.disposition_type, // 处分类型 (惩处扣分)
+                    'penalty_deduction.direct_entry_deduction': result.data.direct_entry_deduction, // 直接录入扣分 (惩处扣分)
+
+                    'education.highest_education': result.data.highest_education, // 最高学历 (学历)
+                    'education.before_enlisting_education': result.data.before_enlisting_education, // 入伍前学历 (学历)
+
+                    'remote_hardship.three_category': result.data.three_category, // 三类边远艰苦地区(三类岛) (边远艰苦地区年限)
+                    'remote_hardship.four_category': result.data.four_category, // 四类边远艰苦地区(海拔2500米至3500米、二类岛服役) (边远艰苦地区年限)
+                    'remote_hardship.five_category': result.data.five_category, // 五类边远艰苦地区(海拔3500米至4500米、一类岛服役) (边远艰苦地区年限)
+                    'remote_hardship.six_category': result.data.six_category, // 六类边远艰苦地区(海拔4500米以上地区、特类岛) (边远艰苦地区年限)
+
+                    'special_post.aircraft': result.data.aircraft, // 飞机 (特殊岗位年限)
+                    'special_post.naval_vessels': result.data.naval_vessels, // 舰艇 (特殊岗位年限)
+                    'special_post.nuclear_involvement': result.data.nuclear_involvement, // 涉核 (特殊岗位年限)
+
+                    'retention': result.data.retention, // 滞留扣分数据
+                });
+                console.log(that.data);
+            };
         }, function(result) {
             console.log("fail");
         }, function() {
