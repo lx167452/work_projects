@@ -1,20 +1,24 @@
 <view class="container">
     <!-- 服役年限 -->
+
     <view class="menu_cell">
         <view class="menu_cell_title">服役年限</view>
         <view class="menu_cell_bar">
             <!-- 服役年限开始时间 -->
             <view class="select_items">
-                <picker class="item_cell" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                <!-- <picker class="item_cell" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
                     {{array[index]}}
+                </picker> -->
+                <picker class="item_cell" mode="date" value="{{service_length.start_time}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+                    {{save_data.start_text}}
                 </picker>
                 <view class="triangle_icons"></view>
             </view>
             <view class="to_txt">到</view>
             <!-- 服役年限结束时间 -->
             <view class="select_items">
-                <picker class="item_cell" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-                    {{array[index]}}
+                <picker class="item_cell" mode="date" value="{{service_length.end_time}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+                    {{save_data.end_text}}
                 </picker>
                 <view class="triangle_icons"></view>
             </view>
@@ -30,7 +34,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title">行政职务</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.administration_post_index}}" range="{{post.administration_post}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -39,7 +43,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title">专业技术</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.expertise_index}}" range="{{post.expertise}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -48,7 +52,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title">领导职务</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.leading_post_index}}" range="{{post.leading_post}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -65,7 +69,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title width314">中央军委授予荣誉称号</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.crack_glory_index}}" range="{{bonus_score.crack_glory}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -74,7 +78,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title width314">大军区级荣誉称号或一等功</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.one_glory_index}}" range="{{bonus_score.one_glory}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -83,7 +87,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title">二等功</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.two_glory_index}}" range="{{bonus_score.two_glory}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -92,7 +96,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title">三等功</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.three_glory_index}}" range="{{bonus_score.three_glory}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -108,7 +112,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title width156">处分类型</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.disposition_type_index}}" range="{{penalty_deduction.disposition_type}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -117,10 +121,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title width156">直接录入扣分</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-                        无
-                    </picker>
-                    <view class="triangle_icons"></view>
+                    <input type="digit" name="entry_deduction" class="entry_deduction" value="{{penalty_deduction.direct_entry_deduction}}" autocomplete="off" maxlength="5" size="5" bindinput="showHandle" />
                 </view>
             </view>
         </view>
@@ -134,7 +135,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title width132">最高学历</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.highest_education_index}}" range="{{education.highest_education}}">
                         高中及以下
                     </picker>
                     <view class="triangle_icons"></view>
@@ -143,7 +144,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title width132">入伍前学历</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.before_enlisting_education_index}}" range="{{education.before_enlisting_education}}">
                         高中及以下
                     </picker>
                     <view class="triangle_icons"></view>
@@ -159,7 +160,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title width328">三类边远艰苦地区(三类岛)</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.three_category_index}}" range="{{remote_hardship.three_category}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -168,7 +169,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title width328">四类边远艰苦地区(海拔2500米至3500米、二类岛服役)</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.four_category_index}}" range="{{remote_hardship.four_category}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -177,7 +178,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title width328">五类边远艰苦地区(海拔3500米至4500米、一类岛服役)</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.five_category_index}}" range="{{remote_hardship.five_category}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -186,7 +187,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title width328">六类边远艰苦地区(海拔4500米以上地区、特类岛)</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.six_category_index}}" range="{{remote_hardship.six_category}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -202,7 +203,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title">飞行</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.aircraft_index}}" range="{{special_post.aircraft}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -211,7 +212,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title">舰艇</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.naval_vessels_index}}" range="{{special_post.naval_vessels}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -220,7 +221,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title">涉核</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.nuclear_involvement_index}}" range="{{special_post.nuclear_involvement}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
@@ -236,7 +237,7 @@
             <view class="cell_item_bar">
                 <view class="cell_item_title">个人原因不报到</view>
                 <view class="cell_item">
-                    <picker class="item_select" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker class="item_select" bindchange="bindPickerChange" value="{{save_data.retention_index}}" range="{{retention}}">
                         无
                     </picker>
                     <view class="triangle_icons"></view>
