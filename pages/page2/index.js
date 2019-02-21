@@ -1,42 +1,6 @@
 let App = getApp();
 Page({
     data: {
-        // service_length: { // 服役年限
-        //     start_time: "1970-01-01", // 开始时间
-        //     end_time: "2018-08-28" // 结束时间
-        // },
-        // post: { // 职务
-        //     administration_post: ["排职", "副连职", "正连职", "副营职", "正营职", "副团职", "正团职", "副师职"], // 行政职务
-        //     expertise: ["技术1级", "技术2级", "技术3级", "技术4级", "技术5级", "技术6级", "技术7级", "技术8级", "技术9级", "技术10级", "技术11级", "技术12级", "技术13级"], // 专业技术
-        //     leading_post: [0, 1] // 领导职务
-        // },
-        // bonus_score: { // 奖励计分
-        //     crack_glory: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], // 中央军委授予荣誉称号
-        //     one_glory: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], // 大军区级荣誉称号或一等功
-        //     two_glory: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], // 二等功
-        //     three_glory: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] // 三等功
-        // },
-        // penalty_deduction: { // 惩处扣分
-        //     disposition_type: ["行政警告处分", "行政严重警告处分", "记过及党内警告处分", "记大过及党内严重警告处分", "降职（级）或者降衔（级）及撤销党内职务处分", "撤职处分及留党察看处分"], // 处分类型
-        //     direct_entry_deduction: 0 // 直接录入扣分
-        // },
-        // education: { // 学历
-        //     highest_education: ["高中及以下", "中专", "大专", "本科", "硕士", "博士"], // 最高学历
-        //     before_enlisting_education: ["高中及以下", "中专", "大专", "本科", "硕士", "博士"] // 入伍前学历
-        // },
-        // remote_hardship: { // 边远艰苦地区年限
-        //     three_category: ['一年', '二年', '三年', '四年', '五年', '六年'], // 三类边远艰苦地区(三类岛)
-        //     four_category: ['一年', '二年', '三年', '四年', '五年', '六年'], // 四类边远艰苦地区(海拔2500米至3500米、二类岛服役)
-        //     five_category: ['一年', '二年', '三年', '四年', '五年', '六年'], // 五类边远艰苦地区(海拔3500米至4500米、一类岛服役)
-        //     six_category: ['一年', '二年', '三年', '四年', '五年', '六年'] // 六类边远艰苦地区(海拔4500米以上地区、特类岛)
-        // },
-        // special_post: { // 特殊岗位年限
-        //     aircraft: ['一年', '二年', '三年', '四年', '五年', '六年'], // 飞机
-        //     naval_vessels: ['一年', '二年', '三年', '四年', '五年', '六年'], // 舰艇
-        //     nuclear_involvement: ['一年', '二年', '三年', '四年', '五年', '六年'] // 涉核
-        // },
-        // retention: ['滞留一年', '滞留二年', '滞留三年', '滞留四年', '滞留五年', '滞留六年'], // 滞留扣分数据
-
         service_length: { // 服役年限
             start_time: "1970-01-01", // 开始时间
             end_time: "" // 结束时间
@@ -72,6 +36,8 @@ Page({
             nuclear_involvement: [] // 涉核
         },
         retention: [], // 滞留扣分数据
+        now_time: '', // 当前的时间
+        post_type: 0, // 职务类型 (0行政职务，1专业等级)
 
         save_data: { // 当前下拉或更改及默认值
             start_text: '1970年01月01日', // 开始时间 (服役年限)
@@ -97,163 +63,263 @@ Page({
             retention_index: 0 // 滞留扣分数据
         }
     },
-    bindPickerChange: function(e) {
-        let that = this;
-        console.log('picker发送选择改变，携带值为', e.detail.value)
-        that.setData({ index: e.detail.value });
-    },
-    bindDateChange: function(e) {
-        let that = this;
-        console.log('picker发送选择改变，携带值为', e.detail.value)
-        that.setData({ date: e.detail.value });
-    },
     /**
      * 服役年限 - 开始时间
      */
-    startTimeFn() {
-        // service_length.start_time, // 开始时间
-        // service_length.start_text, // 开始时间
+    startTimeFn(e) {
+        let that = this;
+        let start_arr = e.detail.value.split('-'); // 开始时间字符串分割
+        let start_text = start_arr[0] + '年' + start_arr[1] + '月' + start_arr[2] + '日'; // 开始时间字符串
+        that.setData({ 'save_data.start_text': start_text, 'service_length.start_time': e.detail.value });
     },
     /**
      * 服役年限 - 结束时间
      */
-    endTimeFn() {
-        // service_length.end_time, // 结束时间
-        // service_length.end_text, // 结束时间
+    endTimeFn(e) {
+        let that = this;
+        let end_arr = e.detail.value.split('-'); // 结束时间字符串分割
+        let end_text = end_arr[0] + '年' + end_arr[1] + '月' + end_arr[2] + '日'; // 结束时间字符串
+        that.setData({ 'save_data.end_text': end_text, 'service_length.end_time': e.detail.value });
     },
     /**
      * 职务 - 行政职务
      */
-    administrationPostFn() {
-        // post.administration_post, // 行政职务
+    administrationPostFn(e) {
+        let that = this;
+        that.setData({ 'save_data.administration_post_index': e.detail.value, post_type: 0 });
     },
     /**
      * 职务 - 专业技术
      */
-    expertiseFn() {
-        // post.expertise, // 专业技术
+    expertiseFn(e) {
+        let that = this;
+        that.setData({ 'save_data.expertise_index': e.detail.value, post_type: 1 });
     },
     /**
      * 职务 - 领导职务
      */
-    leadingPostFn() {
-        // post.leading_post, // 领导职务
+    leadingPostFn(e) {
+        let that = this;
+        that.setData({ 'save_data.leading_post_index': e.detail.value });
     },
     /**
      * 奖励计分 - 中央军委授予荣誉称号
      */
-    crackGloryFn() {
-        // bonus_score.crack_glory, // 中央军委授予荣誉称号
+    crackGloryFn(e) {
+        let that = this;
+        that.setData({ 'save_data.crack_glory_index': e.detail.value });
     },
     /**
      * 奖励计分 - 大军区级荣誉称号或一等功
      */
-    oneGloryFn() {
-        // bonus_score.one_glory, // 大军区级荣誉称号或一等功
+    oneGloryFn(e) {
+        let that = this;
+        that.setData({ 'save_data.one_glory_index': e.detail.value });
     },
     /**
      * 奖励计分 - 二等功
      */
-    twoGloryFn() {
-        // bonus_score.two_glory, // 二等功
+    twoGloryFn(e) {
+        let that = this;
+        that.setData({ 'save_data.two_glory_index': e.detail.value });
     },
     /**
      * 奖励计分 - 三等功
      */
-    threeGloryFn() {
-        // bonus_score.three_glory, // 三等功
+    threeGloryFn(e) {
+        let that = this;
+        that.setData({ 'save_data.three_glory_index': e.detail.value });
     },
     /**
      * 惩处扣分 - 处分类型
      */
-    dispositionTypeFn() {
-        // penalty_deduction.disposition_type, // 处分类型
+    dispositionTypeFn(e) {
+        let that = this;
+        that.setData({ 'save_data.disposition_type_index': e.detail.value });
     },
     /**
-     * 惩处扣分 - 直接录入扣分
+     * 惩处扣分 - 直接录入扣分 (输入框)
      */
-    directEntryDeductionFn() {
-        // penalty_deduction.direct_entry_deduction, // 直接录入扣分
-    },
-    /**
-     * 学历 - 最高学历
-     */
-    highestEducationFn() {
-        // education.highest_education, // 最高学历
+    directEntryDeductionFn(e) {
+        let that = this;
+        that.setData({ 'save_data.direct_entry_deduction_index': e.detail.value });
     },
     /**
      * 学历 - 最高学历
      */
-    beforeEnlistingEducationFn() {
-        // education.before_enlisting_education, // 入伍前学历
+    highestEducationFn(e) {
+        let that = this;
+        that.setData({ 'save_data.highest_education_index': e.detail.value });
+    },
+    /**
+     * 学历 - 入伍前学历
+     */
+    beforeEnlistingEducationFn(e) {
+        let that = this;
+        that.setData({ 'save_data.before_enlisting_education_index': e.detail.value });
     },
     /**
      * 边远艰苦地区年限 - 三类边远艰苦地区(三类岛)
      */
-    threeCategoryFn() {
-        // remote_hardship.three_category, // 三类边远艰苦地区(三类岛)
+    threeCategoryFn(e) {
+        let that = this;
+        that.setData({ 'save_data.three_category_index': e.detail.value });
     },
     /**
      * 边远艰苦地区年限 - 四类边远艰苦地区(海拔2500米至3500米、二类岛服役)
      */
-    fourCategoryFn() {
-        // remote_hardship.four_category, // 四类边远艰苦地区(海拔2500米至3500米、二类岛服役)
+    fourCategoryFn(e) {
+        let that = this;
+        that.setData({ 'save_data.four_category_index': e.detail.value });
     },
     /**
      * 边远艰苦地区年限 - 五类边远艰苦地区(海拔3500米至4500米、一类岛服役)
      */
-    fiveCategoryFn() {
-        // remote_hardship.five_category, // 五类边远艰苦地区(海拔3500米至4500米、一类岛服役)
+    fiveCategoryFn(e) {
+        let that = this;
+        that.setData({ 'save_data.five_category_index': e.detail.value });
     },
     /**
      * 边远艰苦地区年限 - 六类边远艰苦地区(海拔4500米以上地区、特类岛)
      */
-    sixCategoryFn() {
-        // remote_hardship.six_category, // 六类边远艰苦地区(海拔4500米以上地区、特类岛)
+    sixCategoryFn(e) {
+        let that = this;
+        that.setData({ 'save_data.six_category_index': e.detail.value });
     },
     /**
      * 特殊岗位年限 - 飞机
      */
-    aircraftFn() {
-        // special_post.aircraft, // 飞机
+    aircraftFn(e) {
+        let that = this;
+        that.setData({ 'save_data.aircraft_index': e.detail.value });
     },
     /**
      * 特殊岗位年限 - 舰艇
      */
-    navalVesselsFn() {
-        // special_post.naval_vessels, // 舰艇
+    navalVesselsFn(e) {
+        let that = this;
+        that.setData({ 'save_data.naval_vessels_index': e.detail.value });
     },
     /**
      * 特殊岗位年限 - 涉核
      */
-    nuclearInvolvementFn() {
-        // special_post.nuclear_involvement, // 涉核
+    nuclearInvolvementFn(e) {
+        let that = this;
+        that.setData({ 'save_data.nuclear_involvement_index': e.detail.value });
     },
     /**
      * 滞留扣分数据
      */
-    retentionFn() {
-        // retention, // 滞留扣分数据
-    },
-    // 检验输入框输入的数字是否正常
-    numberCheck(num) {
+    retentionFn(e) {
         let that = this;
-        // let re= /^\d*\.{0,1}\d{0,3}$/;
-        let re = /^\d+(\.\d+){0,1}$/;
-        return re.exec(num) != null;
-
-        // // 调用写法
-        // let input_val = e.detail.value; // 输入框结果的值
-        // that.setData({ "penalty_deduction.direct_entry_deduction": value }); // 直接录入扣分
-        // if (!NumberCheck("10")) {
-        //     console.log("false");
-        // } else {
-        //     console.log("true");
-        // }
-        // 0.0 转为 0
-        // if (replaceArray.length != 0) {
-        //     wx.showToast({ title: '只能输入数字，小数点和加减号', icon: 'none' });
-        // }
+        that.setData({ 'save_data.retention_index': e.detail.value });
+    },
+    /**
+     * 计算两个时间相差的年份
+     */
+    timeDifference(end_time, start_time) {
+        let that = this;
+        let start_time_diff = start_time.split('-'); // 开始时间
+        let end_time_diff = end_time.split('-'); // 结束时间
+        let start_year = start_time_diff[0];
+        let start_month = start_time_diff[1];
+        let start_day = start_time_diff[2];
+        let end_year = end_time_diff[0];
+        let end_month = end_time_diff[1];
+        let end_day = end_time_diff[2];
+        let yearNumber = 0;
+        if (end_time_diff != start_time_diff) {
+            if (end_month == start_month && end_day == start_day) {
+                yearNumber = end_year - start_year;
+            } else {
+                yearNumber = (end_year - start_year) + 1;
+            }
+        } else {
+            yearNumber = 1;
+        }
+        return yearNumber;
+    },
+    /**
+     * 处理计算总分数
+     */
+    computeSource(service_year_source) {
+        let that = this;
+        let post_type_score = parseFloat(that.data.post_type == 0 ? that.data.post.administration_post[that.data.save_data.administration_post_index].score : that.data.post.expertise[that.data.save_data.expertise_index].score); // 职务类型选择和分数 (0行政职务，1专业等级)
+        let leading_post_score = parseFloat(that.data.post.leading_post[that.data.save_data.leading_post_index].score); // 领导职务
+        let crack_glory_score = parseFloat(that.data.bonus_score.crack_glory[that.data.save_data.crack_glory_index].score); // 中央军委授予荣誉称号
+        let one_glory_score = parseFloat(that.data.bonus_score.one_glory[that.data.save_data.one_glory_index].score); // 一等功
+        let two_glory_score = parseFloat(that.data.bonus_score.two_glory[that.data.save_data.two_glory_index].score); // 二等功
+        let three_glory_score = parseFloat(that.data.bonus_score.three_glory[that.data.save_data.three_glory_index].score); // 三等功
+        let disposition_type_score = parseFloat(that.data.penalty_deduction.disposition_type[that.data.save_data.disposition_type_index].score); // 处分类型 (减分)
+        let direct_entry_deduction_score = parseFloat(that.data.save_data.direct_entry_deduction_index); // 直接录入扣分 (减分)
+        let highest_education_score = parseFloat(that.data.education.highest_education[that.data.save_data.highest_education_index].score); // 最高学历
+        let before_enlisting_education_score = parseFloat(that.data.education.before_enlisting_education[that.data.save_data.before_enlisting_education_index].score); // 入伍前学历
+        let three_category_score = parseFloat(that.data.remote_hardship.three_category[that.data.save_data.three_category_index].score); // 三类边远艰苦地区(三类岛)
+        let four_category_score = parseFloat(that.data.remote_hardship.four_category[that.data.save_data.four_category_index].score); // 四类边远艰苦地区(海拔2500米至3500米、二类岛服役)
+        let five_category_score = parseFloat(that.data.remote_hardship.five_category[that.data.save_data.five_category_index].score); // 五类边远艰苦地区(海拔3500米至4500米、一类岛服役)
+        let six_category_score = parseFloat(that.data.remote_hardship.six_category[that.data.save_data.six_category_index].score); // 六类边远艰苦地区(海拔4500米以上地区、特类岛)
+        let aircraft_score = parseFloat(that.data.special_post.aircraft[that.data.save_data.aircraft_index].score); // 飞机
+        let naval_vessels_score = parseFloat(that.data.special_post.naval_vessels[that.data.save_data.naval_vessels_index].score); // 舰艇
+        let nuclear_involvement_score = parseFloat(that.data.special_post.nuclear_involvement[that.data.save_data.nuclear_involvement_index].score); // 涉核
+        let retention_score = parseFloat(that.data.retention[that.data.save_data.retention_index].score); // 滞留扣分数据 (减分)
+        let coutScore = 0; // 总分
+        coutScore = (service_year_source + post_type_score + leading_post_score + crack_glory_score + one_glory_score + two_glory_score + three_glory_score + highest_education_score + before_enlisting_education_score + three_category_score + four_category_score + five_category_score + six_category_score + aircraft_score + naval_vessels_score + nuclear_involvement_score) - (disposition_type_score + direct_entry_deduction_score + retention_score);
+        coutScore = parseFloat(coutScore.toFixed(2));
+        return coutScore;
+    },
+    /**
+     * 提交数据请求
+     */
+    subFn() {
+        let that = this;
+        let nickName = App.globalData.userInfo.nickName != '' ? App.globalData.userInfo.nickName : 'Steven'; // 微信昵称
+        let post_type = that.data.post_type; // 选择职务的类型
+        let job_index = post_type == 0 ? that.data.save_data.administration_post_index : that.data.save_data.expertise_index; // 选中职务或等级选中的下标
+        // 计算分数 (惩处和滞留-扣分) (服役年限算分: 8年以内(含8年)，每1年计0.8分；9至15年包含15，从第9年起，每1年计1分；16年以上，从第16年起，每1年计1.2分)
+        let yearNumber = that.timeDifference(that.data.service_length.end_time, that.data.service_length.start_time); // 相差的年份
+        // 服役年限分数处理
+        let service_length_source = 0;
+        if (yearNumber >= 16) {
+            service_length_source = (8 * 0.8) + (7 * 1) + ((yearNumber - 15) * 1.2);
+        } else if (yearNumber >= 9 && yearNumber < 16) {
+            service_length_source = (8 * 0.8) + ((yearNumber - 8) * 1);
+        } else if (yearNumber <= 8) {
+            service_length_source = yearNumber * 0.8
+        }
+        let score = that.computeSource(service_length_source); // 考核分
+        let data = {
+            weixin: nickName, // 微信昵称
+            score: score, // 考核分
+            fuyi_starttime: that.data.service_length.start_time, // 服役开始时间
+            fuyi_endtime: that.data.service_length.end_time, // 服役结束时间
+            type: post_type, // 职务选中的类型 (0行政职务，1专业等级)
+            dengji: job_index, // 职务等级
+            zhiwu_status: that.data.save_data.leading_post_index, // 是否领导职务 1是 2否
+            jiangli: that.data.save_data.crack_glory_index, // 中央军委授予荣誉称号
+            yideng: that.data.save_data.one_glory_index, // 一等功
+            erdeng: that.data.save_data.two_glory_index, // 二等功
+            sandeng: that.data.save_data.three_glory_index, // 三等功
+            chufen: that.data.save_data.disposition_type_index, // 处分类型
+            geren: parseFloat(that.data.save_data.direct_entry_deduction_index), // 直接录入扣分
+            zuigao: that.data.save_data.highest_education_index, // 最高学历
+            ruwu: that.data.save_data.before_enlisting_education_index, // 入伍前学历
+            sanlei: that.data.save_data.three_category_index, // 三类地区
+            silei: that.data.save_data.four_category_index, // 四类地区
+            wulei: that.data.save_data.five_category_index, // 五类地区
+            liulei: that.data.save_data.six_category_index, // 六类地区
+            feixing: that.data.save_data.aircraft_index, // 飞行岗
+            jianting: that.data.save_data.naval_vessels_index, // 舰艇岗
+            shehe: that.data.save_data.nuclear_involvement_index, // 涉核岗
+            zhiliu: that.data.save_data.retention_index // 滞留
+        };
+        console.log(data);
+        App._post('api/index/test', { data: data }, function(result) {
+            console.log("success");
+        }, function(result) {
+            // console.log("fail");
+        }, function() {
+            // console.log("complete");
+        });
     },
     /**
      * 右上角的用户分享
@@ -262,7 +328,8 @@ Page({
         return {
             title: '湖北省军转安置考试分数统计系统',
             desc: '湖北省军转安置考试分数统计系统',
-            path: 'pages/index/index'
+            imageUrl: "http://files.nacy.cc/retire_wechat_logo.jpg",
+            path: 'pages/page1/index'
         }
     },
     /**
@@ -278,44 +345,60 @@ Page({
     onShow: function() {
         let that = this;
         App._post('api/index/getList', {}, function(result) {
-            if (result.code == 1) {
-                console.log('success');
-                that.setData({
-                    'service_length.start_time': result.data.start_time, // 开始时间 (服役年限)
-                    'service_length.end_time': result.data.end_time, // 结束时间 (服役年限)
+                if (result.code == 1) {
+                    console.log('success');
+                    let start_text = ''; // 开始时间字符串
+                    let end_text = ''; // 结束时间字符串
+                    let start_time = 'result.data.start_time';
+                    if (result.data.start_time == '') {
+                        start_time = '1970-01-01';
+                    }
+                    // 开始和结束时间显示处理 (服役年限)
+                    let start_arr = start_time.split('-'); // 开始时间字符串分割
+                    let end_arr = result.data.end_time.split('-'); // 结束时间字符串分割
+                    start_text = start_arr[0] + '年' + start_arr[1] + '月' + start_arr[2] + '日';
+                    end_text = end_arr[0] + '年' + end_arr[1] + '月' + end_arr[2] + '日';
+                    that.setData({
+                        'service_length.start_time': start_time, // 开始时间 (服役年限)
+                        'save_data.start_text': start_text, // 开始时间字符串 (服役年限)
+                        'service_length.end_time': result.data.end_time, // 结束时间 (服役年限)
+                        'save_data.end_text': end_text, // 结束时间字符串 (服役年限)
 
-                    'post.administration_post': result.data.administration_post, // 行政职务 (职务)
-                    'post.expertise': result.data.expertise, // 专业技术 (职务)
-                    'post.leading_post': result.data.leading_post, // 领导职务 (职务)
+                        'post.administration_post': result.data.administration_post, // 行政职务 (职务)
+                        'post.expertise': result.data.expertise, // 专业技术 (职务)
+                        'post.leading_post': result.data.leading_post, // 领导职务 (职务)
 
-                    'bonus_score.crack_glory': result.data.crack_glory, // 中央军委授予荣誉称号 (奖励计分)
-                    'bonus_score.one_glory': result.data.crack_glory, // 大军区级荣誉称号或一等功 (奖励计分)
-                    'bonus_score.two_glory': result.data.crack_glory, // 二等功 (奖励计分)
-                    'bonus_score.three_glory': result.data.crack_glory, // 三等功 (奖励计分)
+                        'bonus_score.crack_glory': result.data.crack_glory, // 中央军委授予荣誉称号 (奖励计分)
+                        'bonus_score.one_glory': result.data.crack_glory, // 大军区级荣誉称号或一等功 (奖励计分)
+                        'bonus_score.two_glory': result.data.crack_glory, // 二等功 (奖励计分)
+                        'bonus_score.three_glory': result.data.crack_glory, // 三等功 (奖励计分)
 
-                    'penalty_deduction.disposition_type': result.data.disposition_type, // 处分类型 (惩处扣分)
-                    'penalty_deduction.direct_entry_deduction': result.data.direct_entry_deduction, // 直接录入扣分 (惩处扣分)
+                        'penalty_deduction.disposition_type': result.data.disposition_type, // 处分类型 (惩处扣分)
+                        'penalty_deduction.direct_entry_deduction': result.data.direct_entry_deduction, // 直接录入扣分 (惩处扣分)
 
-                    'education.highest_education': result.data.highest_education, // 最高学历 (学历)
-                    'education.before_enlisting_education': result.data.before_enlisting_education, // 入伍前学历 (学历)
+                        'education.highest_education': result.data.highest_education, // 最高学历 (学历)
+                        'education.before_enlisting_education': result.data.before_enlisting_education, // 入伍前学历 (学历)
 
-                    'remote_hardship.three_category': result.data.three_category, // 三类边远艰苦地区(三类岛) (边远艰苦地区年限)
-                    'remote_hardship.four_category': result.data.four_category, // 四类边远艰苦地区(海拔2500米至3500米、二类岛服役) (边远艰苦地区年限)
-                    'remote_hardship.five_category': result.data.five_category, // 五类边远艰苦地区(海拔3500米至4500米、一类岛服役) (边远艰苦地区年限)
-                    'remote_hardship.six_category': result.data.six_category, // 六类边远艰苦地区(海拔4500米以上地区、特类岛) (边远艰苦地区年限)
+                        'remote_hardship.three_category': result.data.three_category, // 三类边远艰苦地区(三类岛) (边远艰苦地区年限)
+                        'remote_hardship.four_category': result.data.four_category, // 四类边远艰苦地区(海拔2500米至3500米、二类岛服役) (边远艰苦地区年限)
+                        'remote_hardship.five_category': result.data.five_category, // 五类边远艰苦地区(海拔3500米至4500米、一类岛服役) (边远艰苦地区年限)
+                        'remote_hardship.six_category': result.data.six_category, // 六类边远艰苦地区(海拔4500米以上地区、特类岛) (边远艰苦地区年限)
 
-                    'special_post.aircraft': result.data.aircraft, // 飞机 (特殊岗位年限)
-                    'special_post.naval_vessels': result.data.naval_vessels, // 舰艇 (特殊岗位年限)
-                    'special_post.nuclear_involvement': result.data.nuclear_involvement, // 涉核 (特殊岗位年限)
+                        'special_post.aircraft': result.data.aircraft, // 飞机 (特殊岗位年限)
+                        'special_post.naval_vessels': result.data.naval_vessels, // 舰艇 (特殊岗位年限)
+                        'special_post.nuclear_involvement': result.data.nuclear_involvement, // 涉核 (特殊岗位年限)
 
-                    'retention': result.data.retention, // 滞留扣分数据
-                });
-                console.log(that.data);
-            };
-        }, function(result) {
-            console.log("fail");
-        }, function() {
-            console.log("complete");
-        });
+                        'retention': result.data.retention, // 滞留扣分数据
+
+                        'now_time': result.data.now_time // 当前的时间
+                    });
+                };
+            },
+            function(result) {
+                console.log("fail");
+            },
+            function() {
+                console.log("complete");
+            })
     }
 })

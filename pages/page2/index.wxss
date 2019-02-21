@@ -133,6 +133,10 @@
     color: #333;
 }
 
+.selected_active {
+    border-color: #2695CD !important;
+}
+
 .container .sub_btn {
     width: 460rpx;
     height: 76rpx;

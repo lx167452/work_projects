@@ -42,10 +42,22 @@ Page({
         }
     },
     /**
+     * 右上角的用户分享
+     */
+    onShareAppMessage: function() {
+        return {
+            title: '湖北省军转安置考试分数统计系统',
+            desc: '湖北省军转安置考试分数统计系统',
+            imageUrl: "http://files.nacy.cc/retire_wechat_logo.jpg",
+            path: 'pages/page1/index'
+        }
+    },
+    /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
         let that = this;
+        wx.showShareMenu({ withShareTicket: true });
     },
     /**
      * 生命周期函数--监听页面显示
