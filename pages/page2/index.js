@@ -313,7 +313,7 @@ Page({
             zhiliu: that.data.save_data.retention_index // 滞留
         };
         console.log(data);
-        App._post('api/index/test', { data: data }, function(result) {
+        App._post('api/index/test', { data: JSON.stringify(data) }, function(result) {
             console.log("success");
         }, function(result) {
             // console.log("fail");
