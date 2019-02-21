@@ -9,7 +9,7 @@ Page({
      */
     getuserInfoFn(e) {
         let that = this;
-        let datas = wx.getStorageSync('userinfo') || '';
+        // let data = wx.getStorageSync('userinfo') || '';
         if (e.detail.userInfo) {
             App.globalData.userInfo = e.detail.userInfo; // 存储用户到全局
             wx.setStorageSync('userinfo', e.detail.userInfo); // 用户的信息存储到本地存储中
@@ -18,7 +18,10 @@ Page({
                     if (res.code) {
                         // 发起网络请求, 把code传给后端
                         App._post('api/index/userInfo', { code: res.code }, function(result) {
-                            // console.log('success');
+                            if (result.code == 1) {
+                                // console.log('success');
+                                console.log(result.data);
+                            }
                         }, function(result) {
                             // console.log("fail");
                         }, function() {
@@ -46,7 +49,7 @@ Page({
      */
     onShareAppMessage: function() {
         return {
-            title: '湖北省军转安置考试分数统计系统',
+            title: '湖北退役安置分数统计',
             desc: '湖北省军转安置考试分数统计系统',
             imageUrl: "http://files.nacy.cc/retire_wechat_logo.jpg",
             path: 'pages/page1/index'

@@ -6,7 +6,7 @@
         <view class="menu_cell_bar">
             <view class="select_items">
                 <picker class="item_cell" bindchange="placeSelectFn" value="{{place_index}}" range="{{placeData}}">
-                    {{placeData[place_index]}}地区
+                    {{placeData[place_index]}}
                 </picker>
                 <view class="triangle_icons"></view>
             </view>

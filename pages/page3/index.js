@@ -87,7 +87,7 @@ Page({
      */
     onShareAppMessage: function() {
         return {
-            title: '湖北省军转安置考试分数统计系统',
+            title: '湖北退役安置分数统计',
             desc: '湖北省军转安置考试分数统计系统',
             imageUrl: "http://files.nacy.cc/retire_wechat_logo.jpg",
             path: 'pages/page1/index'

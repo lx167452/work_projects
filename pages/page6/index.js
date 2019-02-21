@@ -15,13 +15,31 @@ Page({
     placeSelectFn(e) {
         let that = this;
         that.setData({ place_index: e.detail.value });
+        that.requireFn();
+    },
+    /**
+     * 请求数据
+     */
+    requireFn() {
+        let that = this;
+        App._post('api/index/examine', { anzhi: that.data.place_index }, function(result) {
+            if (result.code == 1) {
+                that.setData({ username: result.data.name, ranking: result.data.ranking, total_score: result.data.score, countNumn: result.data.count });
+            }
+            console.log(result);
+            // console.log('success');
+        }, function(result) {
+            // console.log("fail");
+        }, function() {
+            // console.log("complete");
+        });
     },
     /**
      * 右上角的用户分享
      */
     onShareAppMessage: function() {
         return {
-            title: '湖北省军转安置考试分数统计系统',
+            title: '湖北退役安置分数统计',
             desc: '湖北省军转安置考试分数统计系统',
             imageUrl: "http://files.nacy.cc/retire_wechat_logo.jpg",
             path: 'pages/page1/index'
@@ -39,13 +57,6 @@ Page({
      */
     onShow: function() {
         let that = this;
-        return false;
-        App._post('', {}, function(result) {
-            // console.log('success');
-        }, function(result) {
-            // console.log("fail");
-        }, function() {
-            // console.log("complete");
-        });
+        that.requireFn();
     }
 })

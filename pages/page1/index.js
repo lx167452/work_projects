@@ -2,7 +2,7 @@ let App = getApp();
 Page({
     // 数据 (页面所需数据均需在这里声明，可用于模板数据绑定)
     data: {
-        is_assessment: false // 是否考核
+        answer: 0 // 0没有作答，1已经作答
     },
     /**
      * 表单提交，获取消息ID
@@ -21,10 +21,10 @@ Page({
     seeScoreFn(e) {
         let that = this;
         let type = e.currentTarget.dataset.type; // 查看的类型
-        // if (!that.data.is_assessment) {
-        //     wx.showToast({ title: '请先进行考核分计算', icon: 'none', duration: 1500 });
-        //     return false;
-        // }
+        if (!that.data.answer) {
+            wx.showToast({ title: '请先进行考核分计算', icon: 'none', duration: 1500 });
+            return false;
+        }
         if (type == 'ranking') {
             // 查看考核分数排名
             wx.navigateTo({ url: '../page3/index' });
@@ -48,11 +48,14 @@ Page({
         let that = this;
         let user_openid = wx.getStorageSync('openid') || '';
         if (user_openid == '') {
-            // wx.redirectTo({ url: '../authorize/index' });
+            wx.redirectTo({ url: '../authorize/index' });
             return false;
         }
-        App._post('api/index/userInfo', {}, function(result) {
-            // console.log('success');
+        App._post('api/index/index', {}, function(result) {
+            if (result.code == 1) {
+                console.log('success');
+                that.setData({ answer: result.data.answer }); // 0 没有作答，1已经作答
+            }
         }, function(result) {
             // console.log("fail");
         }, function() {
@@ -64,7 +67,7 @@ Page({
      */
     onShareAppMessage: function() {
         return {
-            title: '湖北省军转安置考试分数统计系统',
+            title: '湖北退役安置分数统计',
             desc: '湖北省军转安置考试分数统计系统',
             imageUrl: "http://files.nacy.cc/retire_wechat_logo.jpg",
             path: 'pages/page1/index'

@@ -1,9 +1,9 @@
 App({
     // 全局API地址
     // 本地测试环境
-    Domain: 'http://www.test3.com',
-    // 线上测试环境
     // Domain: 'http://www.test3.com',
+    // 线上环境
+    Domain: 'https://www.syrccp.net',
     api_url: '',
     /**
      * 设置api地址
