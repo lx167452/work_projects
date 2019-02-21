@@ -1,20 +1,19 @@
+let App = getApp();
 Page({
     data: {
-        array: ['2018年07月14日', '中国', '巴西', '日本'],
-        index: 0,
-        date: '2016-09-01',
+        username: "啦啦啦", // 姓名
+        placeData: ["武汉", "黄石", "十堰", "宜昌", "襄阳", "鄂州", "随州", "咸宁", "黄冈", "荆门", "荆州", "恩施自治州", "天门", "仙桃", "潜江", "神农架林区"], // 安置地点
+        place_index: 0, // 安置地点选中的下标
+        ranking: 35, // 排名
+        score: 42.5, // 考核分
+        countNumn: 122, // 统计人数
     },
-    bindPickerChange: function(e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
-        this.setData({
-            index: e.detail.value
-        })
-    },
-    bindDateChange: function(e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
-        this.setData({
-            date: e.detail.value
-        })
+    /**
+     * 安置地点
+     */
+    placeSelectFn(e) {
+        let that = this;
+        that.setData({ place_index: e.detail.value });
     },
     /**
      * 右上角的用户分享
@@ -39,5 +38,13 @@ Page({
      */
     onShow: function() {
         let that = this;
+        return false;
+        App._post('', {}, function(result) {
+            // console.log('success');
+        }, function(result) {
+            // console.log("fail");
+        }, function() {
+            // console.log("complete");
+        });
     }
 })

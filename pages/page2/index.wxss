@@ -11,8 +11,8 @@
 .container .menu_cell {
     height: 54rpx;
     line-height: 54rpx;
-    display: flex;
     padding: 30rpx;
+    /* display: flex; */
 }
 
 .container .menu_cell_title {

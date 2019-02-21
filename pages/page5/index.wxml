@@ -3,14 +3,14 @@
     <view class="input_item">
         <view class="item_text">行测</view>
         <view class="input_bar">
-            <input class="username" type="text" placeholder="请输入您的行测成绩" autocomplete="off" maxlength="8" focus="true" bindinput="" />
+            <input class="username" value="{{travel_test}}" type="number" placeholder="请输入您的行测成绩" autocomplete="off" maxlength="8" focus="true" bindinput="travelTestFn" />
         </view>
     </view>
     <view class="input_item">
         <view class="item_text">申论</view>
         <view class="input_bar">
-            <input class="username" type="text" placeholder="请输入您的申论成绩" autocomplete="off" maxlength="8" bindinput="" />
+            <input class="username" value="{{exposition}}" type="number" placeholder="请输入您的申论成绩" autocomplete="off" maxlength="8" bindinput="expositionFn" />
         </view>
     </view>
-    <view class="sub_btn">确认提交数据并查看</view>
+    <view class="sub_btn" bindtap="submitFn">确认提交数据并查看</view>
 </view>

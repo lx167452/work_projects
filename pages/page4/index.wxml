@@ -1,12 +1,12 @@
 <view class="container">
-    <view class="username mt8 padding30">姓名：啦啦啦</view>
+    <view class="username mt8 padding30">姓名：{{username}}</view>
     <!-- 安置地点 -->
     <view class="menu_cell">
         <view class="menu_cell_title">安置地点</view>
         <view class="menu_cell_bar">
             <view class="select_items">
-                <picker class="item_cell" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-                    武汉地区
+                <picker class="item_cell" bindchange="placeSelectFn" value="{{place_index}}" range="{{placeData}}">
+                    {{placeData[place_index]}}地区
                 </picker>
                 <view class="triangle_icons"></view>
             </view>
@@ -14,11 +14,11 @@
     </view>
     <view class="cell_item">
         <view class="cell_title">您的考核分实时排名</view>
-        <view class="cell_text">35名</view>
+        <view class="cell_text">{{ranking}}名</view>
     </view>
     <view class="cell_item">
         <view class="cell_title">您的考核分</view>
-        <view class="cell_text">42.5分</view>
+        <view class="cell_text">{{score}}分</view>
     </view>
-    <view class="statistics">安置地参入统计人数：<text class="count_nums">122人</text></view>
+    <view class="statistics">安置地参入统计人数：<text class="count_nums">{{countNumn}}人</text></view>
 </view>

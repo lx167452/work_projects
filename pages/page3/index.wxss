@@ -4,8 +4,8 @@
     position: absolute;
     left: 0;
     top: 0;
-    overflow: auto;
     background: #fff;
+    overflow: auto;
 }
 
 .container .menu_cell {
@@ -120,6 +120,6 @@
     background: #2695CD;
     color: #fff;
     font-size: 32rpx;
-    margin: 506rpx auto;
+    margin: 506rpx auto 0;
     border-radius: 12rpx;
 }

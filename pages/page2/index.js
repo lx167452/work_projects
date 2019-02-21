@@ -332,6 +332,11 @@ Page({
         let job_index = post_type == 0 ? that.data.save_data.administration_post_index : that.data.save_data.expertise_index; // 选中职务或等级选中的下标
         // 计算分数 (惩处和滞留-扣分) (服役年限算分: 8年以内(含8年)，每1年计0.8分；9至15年包含15，从第9年起，每1年计1分；16年以上，从第16年起，每1年计1.2分)
         let yearNumber = that.timeDifference(that.data.service_length.end_time, that.data.service_length.start_time); // 相差的年份
+        // 验证填写直接录入扣分项的内容
+        if (that.data.save_data.direct_entry_deduction_index == '' || that.data.save_data.direct_entry_deduction_index < 0) {
+            wx.showToast({ title: '请先填写直接录入扣分项', icon: 'none', duration: 1500 });
+            return false;
+        }
         // 服役年限分数处理
         let service_length_source = 0;
         if (yearNumber >= 16) {

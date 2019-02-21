@@ -2,13 +2,13 @@
     <view class="input_item padding30">
         <view class="item_text">姓名</view>
         <view class="input_bar">
-            <input class="username" type="text" placeholder="请输入姓名" maxlength="140" focus="true" bindinput="" />
+            <input name="username" class="username" type="text" value="{{username}}" placeholder="请输入姓名" maxlength="16" focus="true" bindinput="usernameFn" />
         </view>
     </view>
     <view class="input_item padding30">
         <view class="item_text">电话</view>
         <view class="input_bar">
-            <input class="username" type="number" placeholder="请输入电话" maxlength="140" focus="true" bindinput="" />
+            <input name="tel" class="username" type="number" value="{{tel}}" placeholder="请输入电话" maxlength="11" bindinput="telFn" />
         </view>
     </view>
     <!-- 安置地点 -->
@@ -16,8 +16,8 @@
         <view class="menu_cell_title">安置地点</view>
         <view class="menu_cell_bar">
             <view class="select_items">
-                <picker class="item_cell" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-                    武汉地区
+                <picker class="item_cell" bindchange="placeSelectFn" value="{{place_index}}" range="{{placeData}}">
+                    {{placeData[place_index]}}地区
                 </picker>
                 <view class="triangle_icons"></view>
             </view>
@@ -27,5 +27,5 @@
         <text class="titles">提示：</text>
         <view class="reminder">为保证平台数据的真实性，请输入真实姓名和电话， 安置地点，否则您将无法查看综合成绩排名。</view>
     </view>
-    <view class="sub_btn">确认提交数据并查看</view>
+    <view class="sub_btn" bindtap="submitFn">确认提交数据并查看</view>
 </view>

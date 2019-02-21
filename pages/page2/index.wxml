@@ -5,9 +5,6 @@
         <view class="menu_cell_bar">
             <!-- 服役年限开始时间 -->
             <view class="select_items">
-                <!-- <picker class="item_cell" mode="date" value="{{service_length.start_time}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
-                    {{save_data.start_text}}
-                </picker> -->
                 <picker class="item_cell" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{now_time}}" bindchange="startTimeFn">
                     {{save_data.start_text}}
                 </picker>
@@ -124,6 +121,7 @@
                     <input type="number" name="entry_deduction" class="entry_deduction" value="{{save_data.direct_entry_deduction_index}}" autocomplete="off" maxlength="5" size="5" bindinput="directEntryDeductionFn" />
                 </view>
             </view>
+            <text class="tips_txt">说明：多次处分请直接输入扣分分数</text>
         </view>
     </view>
 
