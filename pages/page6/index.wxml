@@ -1,6 +1,6 @@
 <view class="container">
-    <view class="username">姓名：***</view>
-    <view class="username">您的考核分：42.5分</view>
+    <view class="username mt8 padding30">姓名：啦啦啦</view>
+    <view class="username padding30">您的考核分：<text class="check_score">42.5分</text></view>
     <!-- 安置地点 -->
     <view class="menu_cell">
         <view class="menu_cell_title">安置地点</view>
@@ -19,7 +19,7 @@
     </view>
     <view class="cell_item">
         <view class="cell_title">您的总分</view>
-        <view class="cell_text">42.5分</view>
+        <view class="cell_text">89分</view>
     </view>
-    <view class="statistics">安置地参入统计人数：122人</view>
+    <view class="statistics">安置地参入统计人数：<text class="count_nums">123人</text></view>
 </view>

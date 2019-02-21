@@ -21,10 +21,10 @@ Page({
     seeScoreFn(e) {
         let that = this;
         let type = e.currentTarget.dataset.type; // 查看的类型
-        if (!that.data.is_assessment) {
-            wx.showToast({ title: '请先进行考核分计算', icon: 'none', duration: 1500 });
-            return false;
-        }
+        // if (!that.data.is_assessment) {
+        //     wx.showToast({ title: '请先进行考核分计算', icon: 'none', duration: 1500 });
+        //     return false;
+        // }
         if (type == 'ranking') {
             // 查看考核分数排名
             wx.navigateTo({ url: '../page3/index' });
@@ -48,7 +48,7 @@ Page({
         let that = this;
         let user_openid = wx.getStorageSync('openid') || '';
         if (user_openid == '') {
-            wx.redirectTo({ url: '../authorize/index' });
+            // wx.redirectTo({ url: '../authorize/index' });
             return false;
         }
         App._post('api/index/userInfo', {}, function(result) {

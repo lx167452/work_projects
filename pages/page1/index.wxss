@@ -11,13 +11,14 @@ page {
     overflow: auto;
 }
 
-.container .title,
-.container .menu_box .menu_item {
-    background: #F2F2F2;
-    height: 74rpx;
-    line-height: 74rpx;
+.container .title {
+    margin-bottom: 378rpx;
+    background: #2695CD;
+    height: 70rpx;
+    line-height: 70rpx;
     text-align: center;
-    margin: 76rpx 30rpx 0;
+    font-size: 28rpx;
+    color: #fff;
 }
 
 .container .menu_box {
@@ -25,14 +26,21 @@ page {
 }
 
 .container .menu_box .menu_item {
-    margin: 40rpx 30rpx;
-    background: #C9C8CA;
-    border-radius: 12rpx;
+    width: 600rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    margin: 0 auto 40rpx;
+    background: #2695CD;
+    text-align: center;
+    font-size: 32rpx;
+    border-radius: 10rpx;
+    color: #fff;
 }
 
 .container .tips_text {
-    font-size: 28rpx;
-    width: 80%;
-    margin: 0 auto;
-    margin-top: 180rpx;
+    font-size: 24rpx;
+    color: #333333;
+    width: 456rpx;
+    margin: 282rpx auto 0;
+    text-align: center;
 }

@@ -9,14 +9,14 @@
 }
 
 .container .menu_cell {
-    height: 66rpx;
-    line-height: 66rpx;
+    height: 80rpx;
+    line-height: 80rpx;
     display: flex;
+    padding: 16rpx 30rpx;
 }
 
 .container .menu_cell_title {
     font-size: 28rpx;
-    margin-left: 30rpx;
     width: 130rpx;
 }
 
@@ -26,7 +26,7 @@
 
 .container .select_items {
     width: 452rpx;
-    border: 2rpx solid #BABABA;
+    border: 2rpx solid #E7E7E7;
     display: flex;
     position: relative;
 }
@@ -41,44 +41,68 @@
 }
 
 .container .triangle_icons {
-    width: 46rpx;
-    height: 46rpx;
+    width: 56rpx;
+    height: 56rpx;
     background: url("http://files.nacy.cc/triangle_icons.png") no-repeat;
     background-size: contain;
     position: absolute;
     right: 0;
-    top: 8rpx;
+    top: 10rpx;
     background-color: #fff;
+}
+
+.padding30 {
+    padding: 0 30rpx;
+}
+
+.mt8 {
+    margin-top: 8rpx;
 }
 
 .username {
     display: flex;
-    padding: 30rpx;
-    font-size: 30rpx;
-    margin-top: 18rpx;
+    height: 58rpx;
+    line-height: 58rpx;
+    font-size: 28rpx;
+    color: #333333;
+}
+
+.check_score {
+    font-size: 28rpx;
+    color: #2695CD;
 }
 
 .cell_item {
-    background: #F2F2F2;
-    width: 82%;
-    margin: 46rpx auto 0rpx;
+    width: 600rpx;
+    margin: 46rpx auto 0;
+    border: 2rpx solid #E5E5E5;
+    border-radius: 10rpx;
 }
 
 .cell_item .cell_title {
-    padding: 10rpx 30rpx;
-    font-size: 30rpx;
-    color: #000;
+    margin-top: 46rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #333333;
 }
 
 .cell_item .cell_text {
     text-align: center;
-    padding: 90rpx;
-    font-size: 30rpx;
+    font-size: 60rpx;
+    font-weight: bold;
+    color: #2695CD;
+    margin-top: 16rpx;
+    margin: 18rpx auto 112rpx;
 }
 
 .statistics {
     text-align: center;
-    font-size: 30rpx;
+    font-size: 28rpx;
     color: #333333;
-    margin-top: 68rpx;
+    margin-top: 142rpx;
+}
+
+.count_nums {
+    font-size: 28rpx;
+    color: #2695CD;
 }

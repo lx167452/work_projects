@@ -86,14 +86,14 @@ Page({
      */
     administrationPostFn(e) {
         let that = this;
-        that.setData({ 'save_data.administration_post_index': e.detail.value, post_type: 0 });
+        that.setData({ 'save_data.administration_post_index': e.detail.value, 'save_data.expertise_index': 0, post_type: 0 });
     },
     /**
      * 职务 - 专业技术
      */
     expertiseFn(e) {
         let that = this;
-        that.setData({ 'save_data.expertise_index': e.detail.value, post_type: 1 });
+        that.setData({ 'save_data.expertise_index': e.detail.value, 'save_data.administration_post_index': 0, post_type: 1 });
     },
     /**
      * 职务 - 领导职务
@@ -268,6 +268,61 @@ Page({
         return coutScore;
     },
     /**
+     * 请求用户已经作答选中的答案
+     */
+    selectedItemFn() {
+        let that = this;
+        App._post('api/index/editList', {}, function(result) {
+            if (result.code == 1) {
+                // 处理用户选中的类型 (职务类型 (0行政职务，1专业等级))
+                let administration_post_index = 0; // 行政职务
+                let expertise_index = 0; // 专业等级
+                if (result.data.type == 0) {
+                    administration_post_index = result.data.administration_post;
+                } else {
+                    expertise_index = result.data.expertise;
+                }
+                // 开始和结束时间显示处理
+                let start_text = ''; // 开始时间字符串
+                let end_text = ''; // 结束时间字符串
+                let start_arr = result.data.start_time.split('-'); // 开始时间字符串分割
+                let end_arr = result.data.end_time.split('-'); // 结束时间字符串分割
+                start_text = start_arr[0] + '年' + start_arr[1] + '月' + start_arr[2] + '日';
+                end_text = end_arr[0] + '年' + end_arr[1] + '月' + end_arr[2] + '日';
+                that.setData({
+                    "save_data.start_text": start_text, // 开始时间字符串 (服役年限)
+                    "save_data.end_text": end_text, // 结束时间字符串 (服役年限)
+                    "service_length.start_time": result.data.start_time, // 开始时间 (服役年限)
+                    "service_length.end_time": result.data.end_time, // 结束时间 (服役年限)
+                    "save_data.administration_post_index": administration_post_index, // 行政职务 (职务)
+                    "save_data.expertise": expertise_index, // 专业技术 (职务)
+                    "post_type": result.data.type, // 职务选中的类型 (0行政职务，1专业等级)
+                    "save_data.leading_post_index": result.data.leading_post, // 领导职务 (职务)
+                    "save_data.crack_glory_index": result.data.crack_glory, // 中央军委授予荣誉称号 (奖励计分)
+                    "save_data.one_glory_index": result.data.one_glory, // 一等功 (奖励计分)
+                    "save_data.two_glory_index": result.data.two_glory, // 二等功 (奖励计分)
+                    "save_data.three_glory_index": result.data.three_glory, // 三等功 (奖励计分)
+                    "save_data.disposition_type_index": result.data.disposition_type, // 处分类型 (惩处扣分)
+                    "save_data.direct_entry_deduction_index": result.data.direct_entry_deduction, // 直接录入扣分 (惩处扣分)
+                    "save_data.highest_education_index": result.data.highest_education, // 最高学历 (学历)
+                    "save_data.before_enlisting_education_index": result.data.before_enlisting_education, // 入伍前学历 学历
+                    "save_data.three_category_index": result.data.three_category, // 三类边远艰苦地区(三类岛) (边远艰苦地区年限)
+                    "save_data.four_category_index": result.data.four_category, // 四类边远艰苦地区 (边远艰苦地区年限)
+                    "save_data.five_category_index": result.data.five_category, // 五类边远艰苦地区 (边远艰苦地区年限)
+                    "save_data.six_category_index": result.data.six_category, // 六类边远艰苦地区 (边远艰苦地区年限)
+                    "save_data.aircraft_index": result.data.aircraft, // 飞机 (特殊岗位年限)
+                    "save_data.naval_vessels_index": result.data.naval_vessels, // 舰艇 (特殊岗位年限)
+                    "save_data.nuclear_involvement_index": result.data.nuclear_involvement, // 涉核 (特殊岗位年限)
+                    "save_data.retention_index": result.data.retention // 滞留扣分数据
+                });
+            }
+        }, function(result) {
+            console.log("fail");
+        }, function() {
+            // console.log("complete");
+        });
+    },
+    /**
      * 提交数据请求
      */
     subFn() {
@@ -316,7 +371,7 @@ Page({
         App._post('api/index/test', { data: JSON.stringify(data) }, function(result) {
             console.log("success");
         }, function(result) {
-            // console.log("fail");
+            console.log("fail");
         }, function() {
             // console.log("complete");
         });
@@ -349,7 +404,7 @@ Page({
                     console.log('success');
                     let start_text = ''; // 开始时间字符串
                     let end_text = ''; // 结束时间字符串
-                    let start_time = 'result.data.start_time';
+                    let start_time = result.data.start_time;
                     if (result.data.start_time == '') {
                         start_time = '1970-01-01';
                     }
@@ -392,6 +447,10 @@ Page({
 
                         'now_time': result.data.now_time // 当前的时间
                     });
+                    // 判断用户是否已经考核过
+                    if (parseInt(result.data.is_post)) {
+                        that.selectedItemFn(); // 请求用户已经做答的选项
+                    }
                 };
             },
             function(result) {
