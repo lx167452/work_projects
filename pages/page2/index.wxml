@@ -120,8 +120,8 @@
                 <view class="cell_item">
                     <input type="number" name="entry_deduction" class="entry_deduction" value="{{save_data.direct_entry_deduction_index}}" autocomplete="off" maxlength="5" size="5" bindinput="directEntryDeductionFn" />
                 </view>
+                <text class="tips_txt">说明：多次处分请直接输入扣分分数</text>
             </view>
-            <text class="tips_txt">说明：多次处分请直接输入扣分分数</text>
         </view>
     </view>
 

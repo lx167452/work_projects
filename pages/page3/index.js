@@ -68,7 +68,7 @@ Page({
         let data = {
             name: that.data.username, // 姓名
             phone: that.data.tel, // 电话
-            place_text: that.data.placeData[that.data.place_index], // 安置地点 (名称)
+            // place_text: that.data.placeData[that.data.place_index], // 安置地点 (名称)
             anzhi: that.data.place_index // 安置地点选中的下标
         };
         App._post('api/index/confirm', { data: JSON.stringify(data) }, function(result) {
