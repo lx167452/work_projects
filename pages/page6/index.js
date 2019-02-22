@@ -49,7 +49,8 @@ Page({
     requireFn() {
         let that = this;
         let openId = wx.getStorageSync('openid') || '';
-        App._post('api/index/multiple', { openId: openId }, function(result) {
+        let data = { openId: openId };
+        App._post('api/index/multiple', { data: JSON.stringify(data) }, function(result) {
             if (result.code == 1) {
                 // console.log('success');
                 console.log(result.data);
