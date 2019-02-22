@@ -240,7 +240,7 @@
                 <view class="cell_item_title">个人原因不报到</view>
                 <view class="cell_item">
                     <picker class="item_select" bindchange="retentionFn" value="{{save_data.retention_index}}" range="{{retention}}" range-key="name">
-                        {{retention[save_data.nuclear_involvement_index].name}}
+                        {{retention[save_data.retention_index].name}}
                     </picker>
                     <view class="triangle_icons"></view>
                 </view>

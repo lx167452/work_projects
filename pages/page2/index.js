@@ -388,7 +388,8 @@ Page({
             fuyi_starttime: that.data.service_length.start_time, // 服役开始时间
             fuyi_endtime: that.data.service_length.end_time, // 服役结束时间
             type: post_type, // 职务选中的类型 (0行政职务，1专业等级)
-            dengji: job_index, // 职务等级
+            // dengji: job_index, // 职务等级
+            zhiwu: job_index, // 职务等级
             zhiwu_status: that.data.save_data.leading_post_index, // 是否领导职务 1是 2否
             jiangli: that.data.save_data.crack_glory_index, // 中央军委授予荣誉称号
             yideng: that.data.save_data.one_glory_index, // 一等功
