@@ -20,7 +20,11 @@ Page({
                         App._post('api/index/userInfo', { code: res.code }, function(result) {
                             if (result.code == 1) {
                                 // console.log('success');
-                                console.log(result.data);
+                                let resp = JSON.parse(result.data.msg);
+                                App.globalData.userInfo.openid = resp.openid; // 用户的openid存储到全局
+                                wx.setStorageSync('openid', resp.openid); // 用户的openid存储到本地存储中
+                                App.globalData.isShows = true;
+                                wx.redirectTo({ url: '../page1/index' }); // 跳转到首页
                             }
                         }, function(result) {
                             // console.log("fail");
@@ -32,16 +36,6 @@ Page({
                     }
                 }
             });
-            // App._post('order/cart_pay', {}, function(result) {
-            //     // console.log('success');
-            //     // wx.setStorageSync('openid', result); // 用户的信息存储到本地存储中
-            //     App.globalData.isShows = true;
-            //     wx.redirectTo({ url: '../page2/index' }); // 跳转到首页
-            // }, function(result) {
-            //     // console.log("fail");
-            // }, function() {
-            //     // console.log("complete");
-            // });
         }
     },
     /**
@@ -67,6 +61,11 @@ Page({
      */
     onShow: function() {
         let that = this;
+        let user_openid = wx.getStorageSync('openid') || '';
+        if (user_openid != '') {
+            wx.redirectTo({ url: '../page1/index' }); // 跳转到首页
+            return false;
+        }
     },
     onHide: function() {
         let that = this;

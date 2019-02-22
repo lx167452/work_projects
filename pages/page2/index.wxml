@@ -28,7 +28,9 @@
         </view>
         <view class="menu_cell_list">
             <view class="cell_item_bar">
-                <view class="cell_item_title">行政职务</view>
+                <view class="cell_item_title">行政职务
+                    <view class="select_icons {{post_type == 0? 'select_active': ''}}"></view>
+                </view>
                 <view class="cell_item {{post_type == 0? 'selected_active': ''}}">
                     <picker class="item_select" bindchange="administrationPostFn" value="{{save_data.administration_post_index}}" range="{{post.administration_post}}" range-key="name">
                         {{post.administration_post[save_data.administration_post_index].name}}
@@ -38,7 +40,9 @@
                 <text class="tips_txt">说明：行政或专业选其一</text>
             </view>
             <view class="cell_item_bar">
-                <view class="cell_item_title">专业技术</view>
+                <view class="cell_item_title">专业技术
+                    <view class="select_icons {{post_type == 1? 'select_active': ''}}"></view>
+                </view>
                 <view class="cell_item {{post_type == 1? 'selected_active': ''}}">
                     <picker class="item_select" bindchange="expertiseFn" value="{{save_data.expertise_index}}" range="{{post.expertise}}" range-key="name">
                         {{post.expertise[save_data.expertise_index].name}}

@@ -54,6 +54,19 @@
     background-color: #fff;
 }
 
+.container .select_icons {
+    width: 30rpx;
+    height: 30rpx;
+    background: url("http://files.nacy.cc/unselected_icons.png") no-repeat;
+    background-size: contain;
+    position: absolute;
+}
+
+.container .select_active {
+    background: url("http://files.nacy.cc/selection_icons.png") no-repeat;
+    background-size: contain;
+}
+
 .container .to_txt {
     margin: 0 10rpx;
 }

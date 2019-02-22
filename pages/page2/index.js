@@ -250,6 +250,11 @@ Page({
         let one_glory_score = parseFloat(that.data.bonus_score.one_glory[that.data.save_data.one_glory_index].score); // 一等功
         let two_glory_score = parseFloat(that.data.bonus_score.two_glory[that.data.save_data.two_glory_index].score); // 二等功
         let three_glory_score = parseFloat(that.data.bonus_score.three_glory[that.data.save_data.three_glory_index].score); // 三等功
+        // 处理计算奖励的计分
+        if (parseInt(that.data.save_data.crack_glory_index) > 0) { crack_glory_score = crack_glory_score * parseInt(that.data.save_data.crack_glory_index); } // 中央荣誉称号
+        if (parseInt(that.data.save_data.one_glory_index) > 0) { one_glory_score = one_glory_score * parseInt(that.data.save_data.one_glory_index); } // 一等功
+        if (parseInt(that.data.save_data.two_glory_index) > 0) { two_glory_score = two_glory_score * parseInt(that.data.save_data.two_glory_index); } // 二等功
+        if (parseInt(that.data.save_data.three_glory_index) > 0) { three_glory_score = three_glory_score * parseInt(that.data.save_data.three_glory_index); } // 三等功
         let disposition_type_score = parseFloat(that.data.penalty_deduction.disposition_type[that.data.save_data.disposition_type_index].score); // 处分类型 (减分)
         let direct_entry_deduction_score = parseFloat(that.data.save_data.direct_entry_deduction_index); // 直接录入扣分 (减分)
         let highest_education_score = parseFloat(that.data.education.highest_education[that.data.save_data.highest_education_index].score); // 最高学历
@@ -272,7 +277,8 @@ Page({
      */
     selectedItemFn() {
         let that = this;
-        App._post('api/index/editList', {}, function(result) {
+        let openId = wx.getStorageSync('openid') || '';
+        App._post('api/index/editList', { openId: openId }, function(result) {
             if (result.code == 1) {
                 // 处理用户选中的类型 (职务类型 (0行政职务，1专业等级))
                 let administration_post_index = 0; // 行政职务
@@ -347,6 +353,32 @@ Page({
             service_length_source = yearNumber * 0.8
         }
         let score = that.computeSource(service_length_source); // 考核分
+        // 处理考核分的 (奖励计分)
+        let crack_glory_score = parseFloat(that.data.bonus_score.crack_glory[that.data.save_data.crack_glory_index].score); // 中央军委授予荣誉称号
+        let one_glory_score = parseFloat(that.data.bonus_score.one_glory[that.data.save_data.one_glory_index].score); // 一等功
+        let two_glory_score = parseFloat(that.data.bonus_score.two_glory[that.data.save_data.two_glory_index].score); // 二等功
+        let three_glory_score = parseFloat(that.data.bonus_score.three_glory[that.data.save_data.three_glory_index].score); // 三等功
+        let rewardCount = crack_glory_score + one_glory_score + two_glory_score + three_glory_score; // 奖励的总分
+        let surplus_score = 0; // 多余分数计算处理
+        if (parseInt(that.data.save_data.crack_glory_index) > 0) { // 中央荣誉称号 60
+            if (rewardCount > 60) {
+                surplus_score = rewardCount - 60;
+            }
+        } else if (parseInt(that.data.save_data.one_glory_index) > 0) { // 一等功 40
+            if (rewardCount > 40) {
+                surplus_score = rewardCount - 40;
+            }
+        } else if (parseInt(that.data.save_data.two_glory_index) > 0) { // 二等功 25
+            if (rewardCount > 25) {
+                surplus_score = rewardCount - 25;
+            }
+        } else if (parseInt(that.data.save_data.three_glory_index) > 0) { // 三等功 15
+            if (rewardCount > 15) {
+                surplus_score = rewardCount - 15;
+            }
+        }
+        score = score - surplus_score; // 减去多余分数
+        let openId = wx.getStorageSync('openid') || '';
         let data = {
             weixin: nickName, // 微信昵称
             score: score, // 考核分
@@ -370,7 +402,8 @@ Page({
             feixing: that.data.save_data.aircraft_index, // 飞行岗
             jianting: that.data.save_data.naval_vessels_index, // 舰艇岗
             shehe: that.data.save_data.nuclear_involvement_index, // 涉核岗
-            zhiliu: that.data.save_data.retention_index // 滞留
+            zhiliu: that.data.save_data.retention_index, // 滞留
+            openId: openId
         };
         console.log(data);
         App._post('api/index/test', { data: JSON.stringify(data) }, function(result) {
@@ -404,7 +437,12 @@ Page({
      */
     onShow: function() {
         let that = this;
-        App._post('api/index/getList', {}, function(result) {
+        let openId = wx.getStorageSync('openid') || '';
+        if (openId == '') {
+            wx.redirectTo({ url: '../authorize/index' });
+            return false;
+        }
+        App._post('api/index/getList', { openId: openId }, function(result) {
                 if (result.code == 1) {
                     console.log('success');
                     let start_text = ''; // 开始时间字符串
@@ -429,9 +467,9 @@ Page({
                         'post.leading_post': result.data.leading_post, // 领导职务 (职务)
 
                         'bonus_score.crack_glory': result.data.crack_glory, // 中央军委授予荣誉称号 (奖励计分)
-                        'bonus_score.one_glory': result.data.crack_glory, // 大军区级荣誉称号或一等功 (奖励计分)
-                        'bonus_score.two_glory': result.data.crack_glory, // 二等功 (奖励计分)
-                        'bonus_score.three_glory': result.data.crack_glory, // 三等功 (奖励计分)
+                        'bonus_score.one_glory': result.data.one_glory, // 大军区级荣誉称号或一等功 (奖励计分)
+                        'bonus_score.two_glory': result.data.two_glory, // 二等功 (奖励计分)
+                        'bonus_score.three_glory': result.data.three_glory, // 三等功 (奖励计分)
 
                         'penalty_deduction.disposition_type': result.data.disposition_type, // 处分类型 (惩处扣分)
                         'penalty_deduction.direct_entry_deduction': result.data.direct_entry_deduction, // 直接录入扣分 (惩处扣分)

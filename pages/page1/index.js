@@ -51,9 +51,10 @@ Page({
             wx.redirectTo({ url: '../authorize/index' });
             return false;
         }
-        App._post('api/index/index', {}, function(result) {
+        let openId = wx.getStorageSync('openid') || '';
+        App._post('api/index/index', { openId: openId }, function(result) {
             if (result.code == 1) {
-                console.log('success');
+                // console.log('success');
                 that.setData({ answer: result.data.answer }); // 0 没有作答，1已经作答
             }
         }, function(result) {

@@ -65,11 +65,13 @@ Page({
                 return false;
             }
         }
+        let openId = wx.getStorageSync('openid') || '';
         let data = {
             name: that.data.username, // 姓名
             phone: that.data.tel, // 电话
             // place_text: that.data.placeData[that.data.place_index], // 安置地点 (名称)
-            anzhi: that.data.place_index // 安置地点选中的下标
+            anzhi: that.data.place_index, // 安置地点选中的下标
+            openId: openId
         };
         App._post('api/index/confirm', { data: JSON.stringify(data) }, function(result) {
             // console.log('success');
@@ -77,7 +79,7 @@ Page({
                 wx.navigateTo({ url: '../page4/index' });
             }
         }, function(result) {
-            // console.log("fail");
+            console.log("fail");
         }, function() {
             // console.log("complete");
         });
@@ -105,5 +107,10 @@ Page({
      */
     onShow: function() {
         let that = this;
+        let user_openid = wx.getStorageSync('openid') || '';
+        if (user_openid == '') {
+            wx.redirectTo({ url: '../authorize/index' });
+            return false;
+        }
     }
 });

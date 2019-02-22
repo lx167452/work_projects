@@ -21,14 +21,15 @@ Page({
      */
     requireFn() {
         let that = this;
-        App._post('api/index/examine', { anzhi: that.data.place_index }, function(result) {
+        let openId = wx.getStorageSync('openid') || '';
+        App._post('api/index/examine', { anzhi: that.data.place_index, openId: openId }, function(result) {
             if (result.code == 1) {
                 that.setData({ username: result.data.name, ranking: result.data.ranking, score: result.data.score, countNumn: result.data.count });
             }
             console.log(result);
             // console.log('success');
         }, function(result) {
-            // console.log("fail");
+            console.log("fail");
         }, function() {
             // console.log("complete");
         });
@@ -56,6 +57,11 @@ Page({
      */
     onShow: function() {
         let that = this;
+        let user_openid = wx.getStorageSync('openid') || '';
+        if (user_openid == '') {
+            wx.redirectTo({ url: '../authorize/index' });
+            return false;
+        }
         that.requireFn();
     }
 })

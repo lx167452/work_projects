@@ -31,8 +31,6 @@ Page({
      */
     submitFn(e) {
         let that = this;
-        wx.navigateTo({ url: '../page6/index' });
-        return false;
         // 验证填写的内容项
         if (that.data.travel_test == '') {
             wx.showToast({ title: '请先填写行测成绩', icon: 'none', duration: 1500 });
@@ -41,15 +39,19 @@ Page({
             wx.showToast({ title: '请先填写申论成绩', icon: 'none', duration: 1500 });
             return false;
         }
+        let openId = wx.getStorageSync('openid') || '';
         let data = {
-            travel_test: that.data.travel_test, // 行测
-            exposition: that.data.exposition // 申论
+            hangce: that.data.travel_test, // 行测
+            shenlun: that.data.exposition, // 申论
+            openId: openId
         };
-        App._post('', { data: JSON.stringify(data) }, function(result) {
+        App._post('api/index/record', { data: JSON.stringify(data) }, function(result) {
             // console.log('success');
-            wx.navigateTo({ url: '../page6/index' });
+            if (result.code == 1) {
+                wx.navigateTo({ url: '../page6/index' });
+            }
         }, function(result) {
-            // console.log("fail");
+            console.log("fail");
         }, function() {
             // console.log("complete");
         });
@@ -77,5 +79,10 @@ Page({
      */
     onShow: function() {
         let that = this;
+        let user_openid = wx.getStorageSync('openid') || '';
+        if (user_openid == '') {
+            wx.redirectTo({ url: '../authorize/index' });
+            return false;
+        }
     }
 })
