@@ -2,7 +2,7 @@
     <!-- 服役年限 -->
     <view class="menu_cell">
         <view class="menu_cell_title">
-            <view class="item_line"></view> 服役年限</view>
+            <view class="item_line"></view>服役年限</view>
         <view class="menu_cell_bar">
             <!-- 服役年限开始时间 -->
             <view class="select_items">
@@ -24,9 +24,8 @@
 
     <!-- 职务 -->
     <view class="item_cell_box">
-        <view class="menu_cell_title">职
-            <view class="interval">占位</view>务
-        </view>
+        <view class="menu_cell_title margin-18-6">
+            <view class="item_line"></view>职务</view>
         <view class="menu_cell_list">
             <view class="cell_item_bar">
                 <view class="cell_item_title">行政职务
@@ -44,7 +43,7 @@
                 <view class="cell_item_title">专业技术
                     <view class="select_icons {{post_type == 1? 'select_active': ''}}"></view>
                 </view>
-                <view class="cell_item {{post_type == 1? 'selected_active': ''}}">
+                <view class="cell_item width277 {{post_type == 1? 'selected_active': ''}}">
                     <picker class="item_select" bindchange="expertiseFn" value="{{save_data.expertise_index}}" range="{{post.expertise}}" range-key="name">
                         {{post.expertise[save_data.expertise_index].name}}
                     </picker>
@@ -66,10 +65,11 @@
 
     <!-- 奖励计分 -->
     <view class="item_cell_box">
-        <view class="menu_cell_title">奖励计分</view>
+        <view class="menu_cell_title">
+            <view class="item_line"></view>奖励计分</view>
         <view class="menu_cell_list">
             <view class="cell_item_bar">
-                <view class="cell_item_title width314">中央军委授予荣誉称号</view>
+                <view class="cell_item_title line-height-34">中央军委授予荣誉称号</view>
                 <view class="cell_item">
                     <picker class="item_select" bindchange="crackGloryFn" value="{{save_data.crack_glory_index}}" range="{{bonus_score.crack_glory}}" range-key="name">
                         {{bonus_score.crack_glory[save_data.crack_glory_index].name}}
@@ -78,7 +78,7 @@
                 </view>
             </view>
             <view class="cell_item_bar">
-                <view class="cell_item_title width314">大军区级荣誉称号或一等功</view>
+                <view class="cell_item_title line-height-34">大军区级荣誉称号或一等功</view>
                 <view class="cell_item">
                     <picker class="item_select" bindchange="oneGloryFn" value="{{save_data.one_glory_index}}" range="{{bonus_score.one_glory}}" range-key="name">
                         {{bonus_score.one_glory[save_data.one_glory_index].name}}
@@ -109,7 +109,8 @@
 
     <!-- 惩处扣分 -->
     <view class="item_cell_box">
-        <view class="menu_cell_title">惩处扣分</view>
+        <view class="menu_cell_title">
+            <view class="item_line"></view>惩处扣分</view>
         <view class="menu_cell_list">
             <view class="cell_item_bar">
                 <view class="cell_item_title width156">处分类型</view>
@@ -125,7 +126,7 @@
                 <view class="cell_item">
                     <input type="number" name="entry_deduction" class="entry_deduction" value="{{save_data.direct_entry_deduction_index}}" autocomplete="off" maxlength="5" size="5" bindinput="directEntryDeductionFn" />
                 </view>
-                <text class="tips_txt">说明：多次处分请直接输入扣分分数</text>
+                <text class="tips_txt">说明：多次处分请输入扣分分数</text>
             </view>
         </view>
     </view>
@@ -158,10 +159,11 @@
 
     <!-- 边远艰苦地区年限 -->
     <view class="item_cell_box">
-        <view class="menu_cell_title width242">边远艰苦地区年限</view>
+        <view class="menu_cell_title">
+            <view class="item_line"></view>边远艰苦地区年限</view>
         <view class="menu_cell_list">
             <view class="cell_item_bar">
-                <view class="cell_item_title width328">三类边远艰苦地区(三类岛)</view>
+                <view class="cell_item_title width352">三类边远艰苦地区(三类岛)</view>
                 <view class="cell_item">
                     <picker class="item_select" bindchange="threeCategoryFn" value="{{save_data.three_category_index}}" range="{{remote_hardship.three_category}}" range-key="name">
                         {{remote_hardship.three_category[save_data.three_category_index].name}}
@@ -170,7 +172,7 @@
                 </view>
             </view>
             <view class="cell_item_bar">
-                <view class="cell_item_title width328">四类边远艰苦地区(海拔2500米至3500米、二类岛服役)</view>
+                <view class="cell_item_title width352 line-height-34">四类边远艰苦地区(海拔2500米至3500米、二类岛服役)</view>
                 <view class="cell_item">
                     <picker class="item_select" bindchange="fourCategoryFn" value="{{save_data.four_category_index}}" range="{{remote_hardship.four_category}}" range-key="name">
                         {{remote_hardship.four_category[save_data.four_category_index].name}}
@@ -179,7 +181,7 @@
                 </view>
             </view>
             <view class="cell_item_bar">
-                <view class="cell_item_title width328">五类边远艰苦地区(海拔3500米至4500米、一类岛服役)</view>
+                <view class="cell_item_title width352 line-height-34">五类边远艰苦地区(海拔3500米至4500米、一类岛服役)</view>
                 <view class="cell_item">
                     <picker class="item_select" bindchange="fiveCategoryFn" value="{{save_data.five_category_index}}" range="{{remote_hardship.five_category}}" range-key="name">
                         {{remote_hardship.five_category[save_data.five_category_index].name}}
@@ -188,7 +190,7 @@
                 </view>
             </view>
             <view class="cell_item_bar">
-                <view class="cell_item_title width328">六类边远艰苦地区(海拔4500米以上地区、特类岛)</view>
+                <view class="cell_item_title width352 line-height-34">六类边远艰苦地区(海拔4500米以上地区、特类岛)</view>
                 <view class="cell_item">
                     <picker class="item_select" bindchange="sixCategoryFn" value="{{save_data.six_category_index}}" range="{{remote_hardship.six_category}}" range-key="name">
                         {{remote_hardship.six_category[save_data.six_category_index].name}}
@@ -201,7 +203,7 @@
 
     <!-- 特殊岗位年限 -->
     <view class="item_cell_box">
-        <view class="menu_cell_title width190">特殊岗位年限</view>
+        <view class="menu_cell_title">特殊岗位年限</view>
         <view class="menu_cell_list">
             <view class="cell_item_bar">
                 <view class="cell_item_title">飞行</view>
@@ -235,7 +237,8 @@
 
     <!-- 滞留扣分 -->
     <view class="item_cell_box">
-        <view class="menu_cell_title">滞留扣分</view>
+        <view class="menu_cell_title">
+            <view class="item_line"></view>滞留扣分</view>
         <view class="menu_cell_list">
             <view class="cell_item_bar">
                 <view class="cell_item_title">个人原因不报到</view>
