@@ -55,10 +55,10 @@ Page({
         App._post('api/index/index', { openId: openId }, function(result) {
             if (result.code == 1) {
                 // console.log('success');
-                that.setData({ answer: result.data.answer }); // 0 没有作答，1已经作答
+                that.setData({ answer: parseInt(result.data.answer) }); // 0 没有作答，1已经作答
             }
         }, function(result) {
-            // console.log("fail");
+            console.log("fail");
         }, function() {
             // console.log("complete");
         });
