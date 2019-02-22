@@ -284,9 +284,9 @@ Page({
                 let administration_post_index = 0; // 行政职务
                 let expertise_index = 0; // 专业等级
                 if (result.data.type == 0) {
-                    administration_post_index = result.data.administration_post;
+                    administration_post_index = parseInt(result.data.administration_post) > 0 ? result.data.administration_post : 0;
                 } else {
-                    expertise_index = result.data.expertise;
+                    expertise_index = parseInt(result.data.expertise) > 0 ? result.data.expertise : 0;
                 }
                 // 开始和结束时间显示处理
                 let start_text = ''; // 开始时间字符串
