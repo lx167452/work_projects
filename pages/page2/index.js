@@ -378,6 +378,9 @@ Page({
             }
         }
         score = score - surplus_score; // 减去多余分数
+        if (score < 0 || !score) {
+            score = 0; // 冗余处理
+        }
         let openId = wx.getStorageSync('openid') || '';
         let data = {
             weixin: nickName, // 微信昵称
@@ -407,7 +410,10 @@ Page({
         };
         console.log(data);
         App._post('api/index/test', { data: JSON.stringify(data) }, function(result) {
-            console.log("success");
+            if (result.code == 1) {
+                console.log("success");
+                wx.navigateTo({ url: '../page3/index' });
+            }
         }, function(result) {
             console.log("fail");
         }, function() {
@@ -473,6 +479,7 @@ Page({
 
                         'penalty_deduction.disposition_type': result.data.disposition_type, // 处分类型 (惩处扣分)
                         'penalty_deduction.direct_entry_deduction': result.data.direct_entry_deduction, // 直接录入扣分 (惩处扣分)
+                        'save_data.direct_entry_deduction_index': result.data.direct_entry_deduction, // 直接录入扣分 (惩处扣分)
 
                         'education.highest_education': result.data.highest_education, // 最高学历 (学历)
                         'education.before_enlisting_education': result.data.before_enlisting_education, // 入伍前学历 (学历)
