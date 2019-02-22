@@ -16,8 +16,9 @@ Page({
             wx.login({
                 success(res) {
                     if (res.code) {
+                        let data = { code: res.code };
                         // 发起网络请求, 把code传给后端
-                        App._post('api/index/userInfo', { code: res.code }, function(result) {
+                        App._post('api/index/userInfo', { data: JSON.stringify(data) }, function(result) {
                             if (result.code == 1) {
                                 // console.log('success');
                                 let resp = JSON.parse(result.data.msg);

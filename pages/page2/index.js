@@ -278,7 +278,8 @@ Page({
     selectedItemFn() {
         let that = this;
         let openId = wx.getStorageSync('openid') || '';
-        App._post('api/index/editList', { openId: openId }, function(result) {
+        let data = { openId: openId };
+        App._post('api/index/editList', { data: JSON.stringify(data) }, function(result) {
             if (result.code == 1) {
                 // 处理用户选中的类型 (职务类型 (0行政职务，1专业等级))
                 let administration_post_index = 0; // 行政职务
@@ -449,7 +450,8 @@ Page({
             wx.redirectTo({ url: '../authorize/index' });
             return false;
         }
-        App._post('api/index/getList', { openId: openId }, function(result) {
+        let data = { openId: openId };
+        App._post('api/index/getList', { data: JSON.stringify(data) }, function(result) {
                 if (result.code == 1) {
                     console.log('success');
                     let start_text = ''; // 开始时间字符串

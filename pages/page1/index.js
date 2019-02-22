@@ -52,7 +52,8 @@ Page({
             return false;
         }
         let openId = wx.getStorageSync('openid') || '';
-        App._post('api/index/index', { openId: openId }, function(result) {
+        let data = { openId: openId };
+        App._post('api/index/index', { data: JSON.stringify(data) }, function(result) {
             if (result.code == 1) {
                 // console.log('success');
                 that.setData({ answer: parseInt(result.data.answer) }); // 0 没有作答，1已经作答
