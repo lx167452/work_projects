@@ -57,6 +57,24 @@ Page({
         });
     },
     /**
+     * 请求数据
+     */
+    requireFn() {
+        let that = this;
+        let openId = wx.getStorageSync('openid') || '';
+        App._post('api/index/record', { openId: openId }, function(result) {
+            if (result.code == 1) {
+                // console.log('success');
+                console.log(result.data);
+                that.setData({ travel_test: that.data.hangce, exposition: that.data.shenlun });
+            }
+        }, function(result) {
+            console.log("fail");
+        }, function() {
+            // console.log("complete");
+        });
+    },
+    /**
      * 右上角的用户分享
      */
     onShareAppMessage: function() {
@@ -84,5 +102,6 @@ Page({
             wx.redirectTo({ url: '../authorize/index' });
             return false;
         }
+        that.requireFn();
     }
 })

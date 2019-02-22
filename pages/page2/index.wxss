@@ -9,18 +9,25 @@
 }
 
 .container .menu_cell {
-    height: 54rpx;
-    line-height: 54rpx;
-    padding: 30rpx;
+    padding: 0 30rpx;
     /* display: flex; */
 }
 
 .container .menu_cell_title {
-    width: 130rpx;
-    font-size: 28rpx;
-    text-align: center;
-    background: #f2f2f2;
-    margin-right: 12rpx;
+    height: 80rpx;
+    font-size: 30rpx;
+    color: #2695CD;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.container .item_line {
+    width: 8rpx;
+    background: #2695CD;
+    height: 28rpx;
+    border-radius: 6rpx;
+    margin-right: 16rpx;
 }
 
 .container .menu_cell_bar {
@@ -28,8 +35,9 @@
 }
 
 .container .select_items {
-    width: 248rpx;
-    border: 2rpx solid #BABABA;
+    width: 280rpx;
+    height: 68rpx;
+    border: 2rpx solid #C8C8C8;
     display: flex;
     position: relative;
 }
