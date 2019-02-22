@@ -19,6 +19,9 @@ Page({
         // that.requireFn();
         that.updateDataFn();
     },
+    /**
+     * 更新数据
+     */
     updateDataFn() {
         let that = this;
         let openId = wx.getStorageSync('openid') || '';
@@ -46,11 +49,11 @@ Page({
     requireFn() {
         let that = this;
         let openId = wx.getStorageSync('openid') || '';
-        App._post('api/index/multiple', { anzhi: that.data.place_index, openId: openId }, function(result) {
+        App._post('api/index/multiple', { openId: openId }, function(result) {
             if (result.code == 1) {
                 // console.log('success');
                 console.log(result.data);
-                that.setData({ username: result.data.name, phone: result.data.phone, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count });
+                that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count });
             }
         }, function(result) {
             // console.log("fail");

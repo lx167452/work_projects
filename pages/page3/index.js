@@ -85,6 +85,28 @@ Page({
         });
     },
     /**
+     * 默认数据渲染
+     */
+    requireFn() {
+        let that = this;
+        let openId = wx.getStorageSync('openid') || '';
+        let data = { openId: openId };
+        App._post('api/index/confirm', { data: JSON.stringify(data) }, function(result) {
+            if (result.code == 1) {
+                let index = parseInt(result.data.anzhi) ? result.data.anzhi : 0;
+                that.setData({
+                    username: result.data.name,
+                    tel: result.data.phone,
+                    place_index: index
+                });
+            }
+        }, function(result) {
+            console.log("fail");
+        }, function() {
+            // console.log("complete");
+        });
+    },
+    /**
      * 右上角的用户分享
      */
     onShareAppMessage: function() {
@@ -112,5 +134,6 @@ Page({
             wx.redirectTo({ url: '../authorize/index' });
             return false;
         }
+        that.requireFn(); // 默认渲染数据
     }
 });

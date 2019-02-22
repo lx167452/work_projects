@@ -333,7 +333,7 @@ Page({
      */
     subFn() {
         let that = this;
-        let nickName = App.globalData.userInfo.nickName != '' ? App.globalData.userInfo.nickName : 'Steven'; // 微信昵称
+        let nickName = App.globalData.userInfo.nickName != '' ? App.globalData.userInfo.nickName : ''; // 微信昵称
         let post_type = that.data.post_type; // 选择职务的类型
         let job_index = post_type == 0 ? that.data.save_data.administration_post_index : that.data.save_data.expertise_index; // 选中职务或等级选中的下标
         // 计算分数 (惩处和滞留-扣分) (服役年限算分: 8年以内(含8年)，每1年计0.8分；9至15年包含15，从第9年起，每1年计1分；16年以上，从第16年起，每1年计1.2分)
