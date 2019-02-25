@@ -392,10 +392,14 @@ Page({
         }
         let score = that.computeSource(service_length_source); // 考核分
         // 处理考核分的 (奖励计分)
-        let crack_glory_score = parseFloat(that.data.bonus_score.crack_glory[that.data.save_data.crack_glory_index].score); // 中央军委授予荣誉称号
-        let one_glory_score = parseFloat(that.data.bonus_score.one_glory[that.data.save_data.one_glory_index].score); // 一等功
-        let two_glory_score = parseFloat(that.data.bonus_score.two_glory[that.data.save_data.two_glory_index].score); // 二等功
-        let three_glory_score = parseFloat(that.data.bonus_score.three_glory[that.data.save_data.three_glory_index].score); // 三等功
+        // let crack_glory_score = parseFloat(that.data.bonus_score.crack_glory[that.data.save_data.crack_glory_index].score); // 中央军委授予荣誉称号
+        // let one_glory_score = parseFloat(that.data.bonus_score.one_glory[that.data.save_data.one_glory_index].score); // 一等功
+        // let two_glory_score = parseFloat(that.data.bonus_score.two_glory[that.data.save_data.two_glory_index].score); // 二等功
+        // let three_glory_score = parseFloat(that.data.bonus_score.three_glory[that.data.save_data.three_glory_index].score); // 三等功
+        let crack_glory_score = parseInt(that.data.save_data.crack_glory_index) >= 1 ? (parseFloat(that.data.bonus_score.crack_glory[that.data.save_data.crack_glory_index].score) * parseInt(that.data.save_data.crack_glory_index)) : parseFloat(that.data.bonus_score.crack_glory[that.data.save_data.crack_glory_index].score); // 中央军委授予荣誉称号
+        let one_glory_score = parseInt(that.data.save_data.one_glory_index) >= 1 ? (parseFloat(that.data.bonus_score.one_glory[that.data.save_data.one_glory_index].score) * parseInt(that.data.save_data.one_glory_index)) : parseFloat(that.data.bonus_score.one_glory[that.data.save_data.one_glory_index].score); // 一等功
+        let two_glory_score = parseInt(that.data.save_data.two_glory_index) >= 1 ? (parseFloat(that.data.bonus_score.two_glory[that.data.save_data.two_glory_index].score) * parseInt(that.data.save_data.two_glory_index)) : parseFloat(that.data.bonus_score.two_glory[that.data.save_data.two_glory_index].score); // 二等功
+        let three_glory_score = parseInt(that.data.save_data.three_glory_index) >= 1 ? (parseFloat(that.data.bonus_score.three_glory[that.data.save_data.three_glory_index].score) * parseInt(that.data.save_data.three_glory_index)) : parseFloat(that.data.bonus_score.three_glory[that.data.save_data.three_glory_index].score); // 三等功
         let rewardCount = crack_glory_score + one_glory_score + two_glory_score + three_glory_score; // 奖励的总分
         let surplus_score = 0; // 多余分数计算处理
         if (parseInt(that.data.save_data.crack_glory_index) > 0) { // 中央荣誉称号 60
