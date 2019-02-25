@@ -14,7 +14,7 @@ Page({
     placeSelectFn(e) {
         let that = this;
         that.setData({ place_index: e.detail.value });
-        that.requireFn();
+        that.updateDataFn();
     },
     /**
      * 请求数据
@@ -31,6 +31,32 @@ Page({
             // console.log('success');
         }, function(result) {
             console.log("fail");
+        }, function() {
+            // console.log("complete");
+        });
+    },
+    /**
+     * 更新数据
+     */
+    updateDataFn() {
+        let that = this;
+        let openId = wx.getStorageSync('openid') || '';
+        let data = { anzhi: that.data.place_index, openId: openId };
+        App._post('api/index/confirm', { data: JSON.stringify(data) }, function(result) {
+            if (result.code == 1) {
+                App._post('api/index/examine', { data: JSON.stringify(data) }, function(result) {
+                    if (result.code == 1) {
+                        that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count });
+
+                    }
+                }, function(result) {
+
+                }, function() {
+                    // console.log("complete");
+                });
+            }
+        }, function(result) {
+
         }, function() {
             // console.log("complete");
         });

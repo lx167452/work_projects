@@ -65,8 +65,6 @@ Page({
         let data = { openId: openId };
         App._post('api/index/record', { data: JSON.stringify(data) }, function(result) {
             if (result.code == 1) {
-                // console.log('success');
-                console.log(result.data);
                 that.setData({ travel_test: result.data.hangce, exposition: result.data.shenlun });
             }
         }, function(result) {

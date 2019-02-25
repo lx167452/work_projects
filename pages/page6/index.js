@@ -33,12 +33,19 @@ Page({
         };
         App._post('api/index/confirm', { data: JSON.stringify(data) }, function(result) {
             if (result.code == 1) {
-                // console.log('success');
-                console.log(result.data);
-                that.setData({ username: result.data.name, phone: result.data.phone, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count });
+                App._post('api/index/multiple', { data: JSON.stringify(data) }, function(result) {
+                    if (result.code == 1) {
+                         that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count });
+
+                    }
+                }, function(result) {
+
+                }, function() {
+                    // console.log("complete");
+                });
             }
         }, function(result) {
-            console.log("fail");
+
         }, function() {
             // console.log("complete");
         });
