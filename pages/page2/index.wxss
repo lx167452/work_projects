@@ -5,6 +5,7 @@
     left: 0;
     top: 0;
     overflow: auto;
+    -webkit-overflow-scrolling: touch;
     background: #fff;
 }
 
@@ -44,7 +45,9 @@
 }
 
 .container .menu_cell_bar .item_cell {
-    width: 210rpx;
+    width: 100%;
+    z-index: 4;
+    /* width: 210rpx; */
     height: 68rpx;
     line-height: 68rpx;
     color: #333333;
@@ -116,7 +119,8 @@
 }
 
 .cell_item_bar .item_select {
-    width: 248rpx;
+    /* width: 248rpx; */
+    width: 100%;
     color: #333333;
     font-size: 26rpx;
     text-indent: 16rpx;
@@ -125,6 +129,7 @@
     height: 68rpx;
     line-height: 68rpx;
     overflow: hidden;
+    z-index: 4;
 }
 
 .cell_item_bar .tips_txt {
@@ -142,8 +147,11 @@
 .container .item_cell_box .entry_deduction {
     width: 224rpx;
     padding: 0 12rpx;
-    font-size: 28rpx;
+    font-size: 26rpx;
     color: #333;
+    position: relative;
+    top: 8rpx;
+    left: 4rpx;
 }
 
 .selected_active {
@@ -181,6 +189,31 @@
     width: 277rpx;
     position: relative;
     left: -2rpx;
+}
+
+.container .deviation {
+    position: relative;
+    left: 6rpx;
+    width: 288rpx;
+}
+
+.container .special_item {
+    width: 370rpx;
+    position: relative;
+    left: -90rpx;
+    text-indent: 106rpx;
+}
+
+.container .selecting_icon {
+    width: 46rpx;
+    height: 46rpx;
+    position: absolute;
+    right: 0;
+    top: 11rpx;
+    background: url("http://files.nacy.cc/triangle_icons.png") no-repeat;
+    background-size: contain;
+    background-color: #fff;
+    color: transparent;
 }
 
 

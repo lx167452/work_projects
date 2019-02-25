@@ -378,7 +378,8 @@ Page({
                 surplus_score = rewardCount - 15;
             }
         }
-        score = score - surplus_score; // 减去多余分数
+        let tempScore = parseInt(score) - parseInt(surplus_score); // 减去多余分数
+        score = tempScore;
         if (score < 0 || !score) {
             score = 0; // 冗余处理
         }
@@ -386,7 +387,7 @@ Page({
         let data = {
             weixin: nickName, // 微信昵称
             score: score, // 考核分
-            fuyi:yearNumber,
+            fuyi: yearNumber,
             fuyi_starttime: that.data.service_length.start_time, // 服役开始时间
             fuyi_endtime: that.data.service_length.end_time, // 服役结束时间
             type: post_type, // 职务选中的类型 (0行政职务，1专业等级)

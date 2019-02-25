@@ -6,7 +6,7 @@
         <view class="menu_cell_bar">
             <!-- 服役年限开始时间 -->
             <view class="select_items">
-                <picker class="item_cell" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{now_time}}" bindchange="startTimeFn">
+                <picker class="item_cell" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
                     {{save_data.start_text}}
                 </picker>
                 <view class="triangle_icons"></view>
@@ -14,7 +14,7 @@
             <view class="to_txt">到</view>
             <!-- 服役年限结束时间 -->
             <view class="select_items">
-                <picker class="item_cell" mode="date" value="{{service_length.end_time}}" start="1970-01-01" bindchange="endTimeFn">
+                <picker class="item_cell" mode="date" value="{{service_length.end_time}}" start="{{service_length.start_time}}" end="{{service_length.now_time}}" bindchange="endTimeFn">
                     {{save_data.end_text}}
                 </picker>
                 <view class="triangle_icons"></view>
@@ -32,7 +32,7 @@
                     <view class="select_icons {{post_type == 0? 'select_active': ''}}"></view>
                 </view>
                 <view class="cell_item {{post_type == 0? 'selected_active': ''}}">
-                    <picker class="item_select" bindchange="administrationPostFn" value="{{save_data.administration_post_index}}" range="{{post.administration_post}}" range-key="name">
+                    <picker class="item_select special_item" bindchange="administrationPostFn" value="{{save_data.administration_post_index}}" range="{{post.administration_post}}" range-key="name">
                         {{post.administration_post[save_data.administration_post_index].name}}
                     </picker>
                     <view class="triangle_icons"></view>
@@ -44,7 +44,7 @@
                     <view class="select_icons {{post_type == 1? 'select_active': ''}}"></view>
                 </view>
                 <view class="cell_item width277 {{post_type == 1? 'selected_active': ''}}">
-                    <picker class="item_select" bindchange="expertiseFn" value="{{save_data.expertise_index}}" range="{{post.expertise}}" range-key="name">
+                    <picker class="item_select special_item" bindchange="expertiseFn" value="{{save_data.expertise_index}}" range="{{post.expertise}}" range-key="name">
                         {{post.expertise[save_data.expertise_index].name}}
                     </picker>
                     <view class="triangle_icons"></view>
@@ -118,12 +118,14 @@
                     <picker class="item_select" bindchange="dispositionTypeFn" value="{{save_data.disposition_type_index}}" range="{{penalty_deduction.disposition_type}}" range-key="name">
                         {{penalty_deduction.disposition_type[save_data.disposition_type_index].name}}
                     </picker>
-                    <view class="triangle_icons"></view>
+                    <picker class="item_select selecting_icon" bindchange="dispositionTypeFn" value="{{save_data.disposition_type_index}}" range="{{penalty_deduction.disposition_type}}" range-key="name">
+                        {{penalty_deduction.disposition_type[save_data.disposition_type_index].name}}
+                    </picker>
                 </view>
             </view>
             <view class="cell_item_bar">
                 <view class="cell_item_title width156">直接录入扣分</view>
-                <view class="cell_item">
+                <view class="cell_item deviation">
                     <input type="number" name="entry_deduction" class="entry_deduction" value="{{save_data.direct_entry_deduction_index}}" autocomplete="off" maxlength="5" size="5" bindinput="directEntryDeductionFn" />
                 </view>
                 <text class="tips_txt">说明：多次处分请输入扣分分数</text>
