@@ -415,8 +415,9 @@ Page({
                 surplus_score = rewardCount - 15;
             }
         }
-        let tempScore = parseInt(score) - parseInt(surplus_score); // 减去多余分数
-        score = tempScore;
+        // let tempScore = parseInt(score) - parseInt(surplus_score); // 减去多余分数
+        let tempScore = parseFloat(score.toFixed(2)) - parseFloat(surplus_score.toFixed(2)); // 减去多余分数
+        score = parseFloat(tempScore.toFixed(2));
         if (score < 0 || !score) {
             score = 0; // 冗余处理
         }
