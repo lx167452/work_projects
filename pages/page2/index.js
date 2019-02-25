@@ -240,6 +240,31 @@ Page({
         return yearNumber;
     },
     /**
+     * 处理服役年限问题
+     */
+    yearsHandleFn() {
+        let that = this;
+        let start_time = that.data.service_length.start_time;
+        let end_time = that.data.service_length.end_time;
+        let start_time_diff = start_time.split('-'); // 开始时间
+        let end_time_diff = end_time.split('-'); // 结束时间
+        let start_year = start_time_diff[0];
+        let start_month = start_time_diff[1];
+        let start_day = start_time_diff[2];
+        let end_year = end_time_diff[0];
+        let end_month = end_time_diff[1];
+        let end_day = end_time_diff[2];
+        if (end_year < start_year) {
+            return false;
+        } else if (end_year == start_year && end_month == start_month && end_day < start_day) {
+            return false;
+        } else if (end_year == start_year && end_month < start_month) {
+            return false;
+        } else {
+            return true;
+        }
+    },
+    /**
      * 处理计算总分数
      */
     computeSource(service_year_source) {
@@ -334,7 +359,13 @@ Page({
      */
     subFn() {
         let that = this;
-        let nickName = App.globalData.userInfo.nickName != '' ? App.globalData.userInfo.nickName : ''; // 微信昵称
+        // 微信昵称
+        let userData = wx.getStorageSync('userinfo') || '';
+        let nickName = '';
+        if (userData != '') {
+            nickName = userData.nickName;
+        }
+        // let nickName = App.globalData.userInfo.nickName != '' ? App.globalData.userInfo.nickName : ''; // 微信昵称
         let post_type = that.data.post_type; // 选择职务的类型
         let job_index = post_type == 0 ? that.data.save_data.administration_post_index : that.data.save_data.expertise_index; // 选中职务或等级选中的下标
         // 计算分数 (惩处和滞留-扣分) (服役年限算分: 8年以内(含8年)，每1年计0.8分；9至15年包含15，从第9年起，每1年计1分；16年以上，从第16年起，每1年计1.2分)
@@ -342,6 +373,12 @@ Page({
         // 验证填写直接录入扣分项的内容
         if (that.data.save_data.direct_entry_deduction_index == '' || that.data.save_data.direct_entry_deduction_index < 0) {
             wx.showToast({ title: '请先填写直接录入扣分项', icon: 'none', duration: 1500 });
+            return false;
+        }
+        // 处理服务年限问题
+        let flagStatus = that.yearsHandleFn();
+        if (!flagStatus) {
+            wx.showToast({ title: '服务年限结束时间不能小于开始时间', icon: 'none', duration: 1500 });
             return false;
         }
         // 服役年限分数处理

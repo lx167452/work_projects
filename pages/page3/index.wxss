@@ -41,7 +41,9 @@
 }
 
 .container .menu_cell_bar .item_cell {
-    width: 452rpx;
+    /* width: 452rpx; */
+    width: 100%;
+    z-index: 4;
     font-size: 26rpx;
     text-indent: 18rpx;
     position: relative;
