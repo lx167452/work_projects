@@ -81,8 +81,8 @@ Page({
     endTimeFn(e) {
         let that = this;
         let end_year_index = parseInt(e.detail.value);
-        let end_text = service_length.end_time[end_year_index] + '03月31日';
-        let temp_year = service_length.end_time[end_year_index].substring(0, service_length.end_time[end_year_index].length - 1);
+        let end_text = that.data.service_length.end_time[end_year_index] + '03月31日';
+        let temp_year = that.data.service_length.end_time[end_year_index].substring(0, that.data.service_length.end_time[end_year_index].length - 1);
         let end_time_format = temp_year + '-03-31';
         that.setData({ 'save_data.end_text': end_text, 'service_length.end_time_index': end_year_index, 'service_length.end_time_format': end_time_format });
     },
@@ -353,10 +353,10 @@ Page({
                 that.setData({
                     "service_length.end_time_index": end_time_index, // 结束时间年份的索引
                     "service_length.end_time_format": end_time_format, // 结束时间格式
+                    // "service_length.end_time": result.data.end_time, // 结束时间 (服役年限)
                     "save_data.start_text": start_text, // 开始时间字符串 (服役年限)
                     "save_data.end_text": end_text, // 结束时间字符串 (服役年限)
                     "service_length.start_time": result.data.start_time, // 开始时间 (服役年限)
-                    "service_length.end_time": result.data.end_time, // 结束时间 (服役年限)
                     "save_data.administration_post_index": administration_post_index, // 行政职务 (职务)
                     "save_data.expertise": expertise_index, // 专业技术 (职务)
                     "post_type": result.data.type, // 职务选中的类型 (0行政职务，1专业等级)
@@ -378,7 +378,6 @@ Page({
                     "save_data.nuclear_involvement_index": result.data.nuclear_involvement, // 涉核 (特殊岗位年限)
                     "save_data.retention_index": result.data.retention // 滞留扣分数据
                 });
-                // console.log(that.data);
             }
         }, function(result) {
             console.log("fail");
@@ -589,7 +588,6 @@ Page({
                     if (parseInt(result.data.is_post)) {
                         that.selectedItemFn(); // 请求用户已经做答的选项
                     }
-                    console.log(that.data);
                 };
             },
             function(result) {

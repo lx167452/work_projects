@@ -36,13 +36,13 @@
             <view class="assessment_score">
                 <text class="score">{{ranking}}</text>名
             </view>
-            <view class="tips_text">您的考核分实时排名</view>
+            <view class="tips_text">您的综合成绩实时排名</view>
         </view>
         <view class="assessment_block">
             <view class="assessment_score">
                 <text class="score">{{total_score}}</text>分
             </view>
-            <view class="tips_text">您的考核分</view>
+            <view class="tips_text">您的总分</view>
         </view>
     </view>
 
