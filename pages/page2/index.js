@@ -271,6 +271,10 @@ Page({
         let end_year = end_time_diff[0];
         let end_month = end_time_diff[1];
         let end_day = end_time_diff[2];
+        if (end_year == start_year && end_month == start_month && end_day == start_day) {
+            wx.showToast({ title: '服务年限结束时间不能和开始时间一样', icon: 'none', duration: 1500 });
+            return false;
+        }
         if (end_year < start_year) {
             return false;
         } else if (end_year == start_year && end_month == start_month && end_day < start_day) {
@@ -342,7 +346,7 @@ Page({
                     "save_data.start_text": start_text, // 开始时间字符串 (服役年限)
                     "save_data.end_text": end_text, // 结束时间字符串 (服役年限)
                     "service_length.start_time": result.data.start_time, // 开始时间 (服役年限)
-                    "service_length.end_time": result.data.end_time + '03月31日', // 结束时间 (服役年限)
+                    "service_length.end_time": result.data.end_time, // 结束时间 (服役年限)
                     "save_data.administration_post_index": administration_post_index, // 行政职务 (职务)
                     "save_data.expertise": expertise_index, // 专业技术 (职务)
                     "post_type": result.data.type, // 职务选中的类型 (0行政职务，1专业等级)
@@ -364,6 +368,7 @@ Page({
                     "save_data.nuclear_involvement_index": result.data.nuclear_involvement, // 涉核 (特殊岗位年限)
                     "save_data.retention_index": result.data.retention // 滞留扣分数据
                 });
+                console.log(that.data);
             }
         }, function(result) {
             console.log("fail");

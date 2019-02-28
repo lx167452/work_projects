@@ -135,6 +135,6 @@ Page({
             wx.redirectTo({ url: '../authorize/index' });
             return false;
         }
-        // that.requireFn(); // 默认渲染数据
+        that.requireFn(); // 默认渲染数据
     }
 });

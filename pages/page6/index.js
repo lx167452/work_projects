@@ -10,6 +10,7 @@ Page({
         ranking: 35, // 排名
         total_score: 89, // 总分
         countNumn: 123, // 统计人数
+        zhiwu: 0, // 职务 6副团职  7正团职
     },
     /**
      * 安置地点
@@ -62,7 +63,7 @@ Page({
             if (result.code == 1) {
                 // console.log('success');
                 console.log(result.data);
-                that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count });
+                that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count, zhiwu: parseInt(result.data.zhiwu) });
             }
         }, function(result) {
             // console.log("fail");

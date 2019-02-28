@@ -15,7 +15,7 @@ Page({
     /**
      * 考核分
      */
-    assessmentScoreFn() {
+    assessmentScoreFn(e) {
         let that = this;
         let assessment_score = that.trimFn(e.detail.value);
         that.setData({ assessment_score: assessment_score });
@@ -42,15 +42,19 @@ Page({
     submitFn(e) {
         let that = this;
         // 验证填写的内容项
-        if (that.data.travel_test == '') {
+        if (that.data.assessment_score == '') {
+            wx.showToast({ title: '请先填写考核分', icon: 'none', duration: 1500 });
+            return false;
+        } else if (!that.data.travel_test) {
             wx.showToast({ title: '请先填写行测成绩', icon: 'none', duration: 1500 });
             return false;
-        } else if (that.data.exposition == '') {
+        } else if (!that.data.exposition) {
             wx.showToast({ title: '请先填写申论成绩', icon: 'none', duration: 1500 });
             return false;
         }
         let openId = wx.getStorageSync('openid') || '';
         let data = {
+            r_score: that.data.assessment_score, // 官方考核分
             hangce: that.data.travel_test, // 行测
             shenlun: that.data.exposition, // 申论
             openId: openId
@@ -75,7 +79,7 @@ Page({
         let data = { openId: openId };
         App._post('api/index/record', { data: JSON.stringify(data) }, function(result) {
             if (result.code == 1) {
-                that.setData({ travel_test: result.data.hangce, exposition: result.data.shenlun });
+                that.setData({ travel_test: result.data.hangce, exposition: result.data.shenlun, assessment_score: result.data.r_score });
             }
         }, function(result) {
             console.log("fail");
