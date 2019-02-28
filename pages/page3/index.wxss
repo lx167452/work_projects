@@ -4,124 +4,131 @@
     position: absolute;
     left: 0;
     top: 0;
-    background: #fff;
+    background: #F4F4F4;
     overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
-.container .menu_cell {
-    height: 66rpx;
-    line-height: 66rpx;
-    display: flex;
-    align-items: center;
-    margin-top: 34rpx;
-    padding-left: 30rpx;
-}
-
-.container .menu_cell_title {
-    width: 166rpx;
-    text-indent: 24rpx;
-    font-size: 28rpx;
-    color: #333333;
-    font-weight: bold;
-}
-
-.container .menu_cell_bar {
-    align-items: center;
-    height: 80rpx;
-    line-height: 80rpx;
-}
-
-.container .select_items {
-    width: 500rpx;
-    height: 80rpx;
-    line-height: 80rpx;
-    border: 2rpx solid #BABABA;
-    display: flex;
-    position: relative;
-}
-
-.container .menu_cell_bar .item_cell {
-    /* width: 452rpx; */
+.assessment_block {
     width: 100%;
-    z-index: 4;
-    font-size: 26rpx;
-    text-indent: 18rpx;
-    position: relative;
-    top: -1rpx;
-    right: 2rpx;
-    overflow: hidden;
-    color: #333333;
-    font-size: 28rpx;
+    height: 202rpx;
+    margin-top: 25rpx;
+    background: #FFFFFF;
+}
+
+.assessment_block .assessment_score {
+    padding-top: 20rpx;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.assessment_block .assessment_score .score {
+    color: #E52229;
+    font-size: 72rpx;
     font-weight: bold;
 }
 
-.container .triangle_icons {
+.assessment_block .tips_text {
+    font-size: 26rpx;
+    color: #999999;
+    text-align: center;
+    position: relative;
+    top: -6rpx;
+}
+
+
+/* 输入框项 */
+
+.input_block {
+    background: #fff;
+    padding: 0 30rpx;
+    margin-top: 24rpx;
+}
+
+.input_block .input_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 96rpx;
+    border-bottom: 2rpx solid #F4F4F4;
+    position: relative;
+}
+
+.input_block .input_item .input_name {
+    font-size: 28rpx;
+    color: #666666;
+}
+
+.input_block .input_cell input {
+    width: 360rpx;
+    font-size: 28rpx;
+    color: #333333;
+    text-align: right;
+}
+
+.input_block .input_item .picker {
+    width: 100%;
+    height: 96rpx;
+    line-height: 96rpx;
+    position: absolute;
+    right: 34rpx;
+    text-align: right;
+    top: 0;
+}
+
+.input_block .input_item .right_arrow {
+    width: 19rpx;
+    height: 34rpx;
+    margin-left: 24rpx;
+}
+
+
+/* 友情提示 */
+
+.tooltip_box {
+    background: #F3E4E4;
+    margin: 24rpx 30rpx 0;
+    border-radius: 10rpx;
+    display: flex;
+}
+
+.tooltip_box .tooltip_icon {
+    flex-shrink: 80rpx;
+}
+
+.tooltip_box .tooltip_icon image {
     width: 56rpx;
     height: 56rpx;
-    background: url("http://files.nacy.cc/triangle_icons.png") no-repeat;
-    background-size: contain;
-    position: absolute;
-    right: 0;
-    top: 10rpx;
-    background-color: #fff;
+    margin: 32rpx 0 0 22rpx;
 }
 
-.container .padding30 {
-    padding: 0 30rpx;
+.tooltip_box .tooltip_block {
+    flex: 1;
+    padding: 26rpx 24rpx 0;
 }
 
-.input_item {
-    display: flex;
-    align-items: center;
-    height: 80rpx;
-    line-height: 80rpx;
-    margin-top: 32rpx;
-}
-
-.input_item .item_text {
-    width: 166rpx;
-    text-indent: 24rpx;
+.tooltip_box .tooltip_block .tooltip_title {
     font-size: 28rpx;
-    color: #333333;
+    color: #E52229;
     font-weight: bold;
 }
 
-.input_item .input_bar {
-    border: 2rpx solid #CECECE;
-    padding: 12rpx 12rpx;
-    width: 472rpx;
-}
-
-.input_item .input_bar input {
-    font-size: 32rpx;
-    color: #000;
-}
-
-.container .tips_text {
-    margin: 42rpx auto 0;
-    padding: 0 30rpx;
-    font-size: 26rpx;
+.tooltip_box .tooltip_block .tooltip_text {
+    font-size: 24rpx;
     color: #666666;
-    display: flex;
+    margin-bottom: 28rpx;
+    display: block;
 }
 
-.container .tips_text .titles {
-    width: 144rpx;
-}
-
-.container .reminder {
-    color: #666666;
-    display: inline-block;
-}
-
-.container .sub_btn {
-    width: 600rpx;
-    height: 90rpx;
-    line-height: 90rpx;
+.submit_btn {
+    width: 686rpx;
+    height: 96rpx;
+    font-size: 30rpx;
+    color: #FFFEFE;
+    line-height: 96rpx;
+    background: #E52B32;
+    border-radius: 48rpx;
+    margin: 72rpx auto 0;
     text-align: center;
-    background: #2695CD;
-    color: #fff;
-    font-size: 32rpx;
-    margin: 506rpx auto 0;
-    border-radius: 12rpx;
 }

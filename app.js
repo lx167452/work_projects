@@ -114,6 +114,7 @@ App({
         let that = this;
     },
     globalData: {
+        imgUrl: 'https://www.syrccp.net/assets/wechat/',
         userInfo: { // 用户的信息
             openid: '',
             avatarUrl: '',

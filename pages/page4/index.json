@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "考核分排名"
+    "navigationBarTitleText": "考核分排名",
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#fff",
+    "disableScroll": true
 }

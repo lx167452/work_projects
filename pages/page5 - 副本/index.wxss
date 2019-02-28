@@ -1,0 +1,55 @@
+.container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: auto;
+    background: #fff;
+}
+
+.container .title {
+    text-align: center;
+    margin: 100rpx auto 0;
+    padding-top: 72rpx;
+    font-size: 30rpx;
+    color: #333333;
+}
+
+.input_item {
+    display: flex;
+    height: 80rpx;
+    line-height: 80rpx;
+    align-items: center;
+    margin: 32rpx auto 0;
+}
+
+.input_item .item_text {
+    width: 164rpx;
+    color: #333333;
+    font-size: 28;
+    text-indent: 24rpx;
+}
+
+.input_item .input_bar {
+    border: 2rpx solid #CECECE;
+    padding: 12rpx 12rpx;
+    width: 472rpx;
+}
+
+.input_item .input_bar input {
+    font-size: 32rpx;
+    color: #000;
+}
+
+.container .sub_btn {
+    width: 600rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    background: #2695CD;
+    color: #fff;
+    font-size: 32rpx;
+    margin: 506rpx auto 0;
+    border-radius: 12rpx;
+}

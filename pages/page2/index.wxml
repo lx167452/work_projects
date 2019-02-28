@@ -1,257 +1,249 @@
 <view class="container">
     <!-- 服役年限 -->
-    <view class="menu_cell">
-        <view class="menu_cell_title">
-            <view class="item_line"></view>服役年限</view>
-        <view class="menu_cell_bar">
-            <!-- 服役年限开始时间 -->
-            <view class="select_items">
-                <picker class="item_cell" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
-                    {{save_data.start_text}}
-                </picker>
-                <view class="triangle_icons"></view>
-            </view>
-            <view class="to_txt">到</view>
-            <!-- 服役年限结束时间 -->
-            <view class="select_items">
-                <picker class="item_cell" mode="date" value="{{service_length.end_time}}" start="{{service_length.start_time}}" end="{{service_length.now_time}}" bindchange="endTimeFn">
-                    {{save_data.end_text}}
-                </picker>
-                <view class="triangle_icons"></view>
-            </view>
+    <view class="cell_line">
+        <view class="line_sign"></view>
+        服役年限
+    </view>
+    <view class="select_item bottom_border">
+        <view class="select_item_name">服役时间</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+    </view>
+    <view class="select_item">
+        <view class="select_item_name">退役时间</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
         </view>
     </view>
 
     <!-- 职务 -->
-    <view class="item_cell_box">
-        <view class="menu_cell_title margin-18-6">
-            <view class="item_line"></view>职务</view>
-        <view class="menu_cell_list">
-            <view class="cell_item_bar">
-                <view class="cell_item_title">行政职务
-                    <view class="select_icons {{post_type == 0? 'select_active': ''}}"></view>
-                </view>
-                <view class="cell_item {{post_type == 0? 'selected_active': ''}}">
-                    <picker class="item_select special_item" bindchange="administrationPostFn" value="{{save_data.administration_post_index}}" range="{{post.administration_post}}" range-key="name">
-                        {{post.administration_post[save_data.administration_post_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-                <text class="tips_txt">说明：行政或专业选其一</text>
-            </view>
-            <view class="cell_item_bar">
-                <view class="cell_item_title">专业技术
-                    <view class="select_icons {{post_type == 1? 'select_active': ''}}"></view>
-                </view>
-                <view class="cell_item width277 {{post_type == 1? 'selected_active': ''}}">
-                    <picker class="item_select special_item" bindchange="expertiseFn" value="{{save_data.expertise_index}}" range="{{post.expertise}}" range-key="name">
-                        {{post.expertise[save_data.expertise_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
-            <view class="cell_item_bar">
-                <view class="cell_item_title">领导职务</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="leadingPostFn" value="{{save_data.leading_post_index}}" range="{{post.leading_post}}" range-key="name">
-                        {{post.leading_post[save_data.leading_post_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-                <text class="tips_txt">说明：副团职且二年以上</text>
-            </view>
+    <view class="cell_line">
+        <view class="line_sign"></view>
+        职务
+    </view>
+    <view class="select_item bottom_border">
+        <view class="select_item_name">行政职务</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+    </view>
+    <view class="select_item">
+        <view class="select_item_name">专业技术</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+    </view>
+    <view class="tooltip">* 行政或技术二选其一 *</view>
+    <view class="select_item">
+        <view class="select_item_name">领导职务</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+    </view>
+    <view class="tooltip">* 副团以上领导职务且任职满最低年限 *</view>
+
+    <!-- 奖励积分 -->
+    <view class="cell_line">
+        <view class="line_sign"></view>
+        奖励积分
+    </view>
+    <view class="select_item bottom_border">
+        <view class="select_item_name">中央军委授予荣誉称号</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+    </view>
+    <view class="select_item bottom_border">
+        <view class="select_item_name">大军区级荣誉称号或一等奖</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+    </view>
+    <view class="select_item bottom_border">
+        <view class="select_item_name">二等功</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+    </view>
+    <view class="select_item">
+        <view class="select_item_name">三等功</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
         </view>
     </view>
 
-    <!-- 奖励计分 -->
-    <view class="item_cell_box">
-        <view class="menu_cell_title">
-            <view class="item_line"></view>奖励计分</view>
-        <view class="menu_cell_list">
-            <view class="cell_item_bar">
-                <view class="cell_item_title line-height-34">中央军委授予荣誉称号</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="crackGloryFn" value="{{save_data.crack_glory_index}}" range="{{bonus_score.crack_glory}}" range-key="name">
-                        {{bonus_score.crack_glory[save_data.crack_glory_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
-            <view class="cell_item_bar">
-                <view class="cell_item_title line-height-34">大军区级荣誉称号或一等功</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="oneGloryFn" value="{{save_data.one_glory_index}}" range="{{bonus_score.one_glory}}" range-key="name">
-                        {{bonus_score.one_glory[save_data.one_glory_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
-            <view class="cell_item_bar">
-                <view class="cell_item_title">二等功</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="twoGloryFn" value="{{save_data.two_glory_index}}" range="{{bonus_score.two_glory}}" range-key="name">
-                        {{bonus_score.two_glory[save_data.two_glory_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
-            <view class="cell_item_bar">
-                <view class="cell_item_title">三等功</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="threeGloryFn" value="{{save_data.three_glory_index}}" range="{{bonus_score.three_glory}}" range-key="name">
-                        {{bonus_score.three_glory[save_data.three_glory_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
+    <!-- 惩罚扣分 -->
+    <view class="cell_line">
+        <view class="line_sign"></view>
+        惩罚扣分
+    </view>
+    <view class="select_item bottom_border">
+        <view class="select_item_name">处分类型</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
         </view>
     </view>
-
-    <!-- 惩处扣分 -->
-    <view class="item_cell_box">
-        <view class="menu_cell_title">
-            <view class="item_line"></view>惩处扣分</view>
-        <view class="menu_cell_list">
-            <view class="cell_item_bar">
-                <view class="cell_item_title width156">处分类型</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="dispositionTypeFn" value="{{save_data.disposition_type_index}}" range="{{penalty_deduction.disposition_type}}" range-key="name">
-                        {{penalty_deduction.disposition_type[save_data.disposition_type_index].name}}
-                    </picker>
-                    <picker class="item_select selecting_icon" bindchange="dispositionTypeFn" value="{{save_data.disposition_type_index}}" range="{{penalty_deduction.disposition_type}}" range-key="name">
-                        {{penalty_deduction.disposition_type[save_data.disposition_type_index].name}}
-                    </picker>
-                </view>
-            </view>
-            <view class="cell_item_bar">
-                <view class="cell_item_title width156">直接录入扣分</view>
-                <view class="cell_item deviation">
-                    <input type="number" name="entry_deduction" class="entry_deduction" value="{{save_data.direct_entry_deduction_index}}" autocomplete="off" maxlength="5" size="5" bindinput="directEntryDeductionFn" />
-                </view>
-                <text class="tips_txt">说明：多次处分请输入扣分分数</text>
-            </view>
+    <view class="select_item">
+        <view class="select_item_name">直接录入扣分</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
         </view>
     </view>
+    <view class="tooltip">* 多次处分请输入扣分分数 *</view>
 
     <!-- 学历 -->
-    <view class="item_cell_box">
-        <view class="menu_cell_title">学
-            <view class="interval">占位</view>历</view>
-        <view class="menu_cell_list">
-            <view class="cell_item_bar">
-                <view class="cell_item_title width132">最高学历</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="highestEducationFn" value="{{save_data.highest_education_index}}" range="{{education.highest_education}}" range-key="name">
-                        {{education.highest_education[save_data.highest_education_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
-            <view class="cell_item_bar">
-                <view class="cell_item_title width132">入伍前学历</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="beforeEnlistingEducationFn" value="{{save_data.before_enlisting_education_index}}" range="{{education.before_enlisting_education}}" range-key="name">
-                        {{education.before_enlisting_education[save_data.before_enlisting_education_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
+    <view class="cell_line">
+        <view class="line_sign"></view>
+        学历
+    </view>
+    <view class="select_item bottom_border">
+        <view class="select_item_name">最高学历</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+    </view>
+    <view class="select_item">
+        <view class="select_item_name">入伍前学历</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
         </view>
     </view>
 
     <!-- 边远艰苦地区年限 -->
-    <view class="item_cell_box">
-        <view class="menu_cell_title">
-            <view class="item_line"></view>边远艰苦地区年限</view>
-        <view class="menu_cell_list">
-            <view class="cell_item_bar">
-                <view class="cell_item_title width352">三类边远艰苦地区(三类岛)</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="threeCategoryFn" value="{{save_data.three_category_index}}" range="{{remote_hardship.three_category}}" range-key="name">
-                        {{remote_hardship.three_category[save_data.three_category_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
-            <view class="cell_item_bar">
-                <view class="cell_item_title width352 line-height-34">四类边远艰苦地区(海拔2500米至3500米、二类岛服役)</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="fourCategoryFn" value="{{save_data.four_category_index}}" range="{{remote_hardship.four_category}}" range-key="name">
-                        {{remote_hardship.four_category[save_data.four_category_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
-            <view class="cell_item_bar">
-                <view class="cell_item_title width352 line-height-34">五类边远艰苦地区(海拔3500米至4500米、一类岛服役)</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="fiveCategoryFn" value="{{save_data.five_category_index}}" range="{{remote_hardship.five_category}}" range-key="name">
-                        {{remote_hardship.five_category[save_data.five_category_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
-            <view class="cell_item_bar">
-                <view class="cell_item_title width352 line-height-34">六类边远艰苦地区(海拔4500米以上地区、特类岛)</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="sixCategoryFn" value="{{save_data.six_category_index}}" range="{{remote_hardship.six_category}}" range-key="name">
-                        {{remote_hardship.six_category[save_data.six_category_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
+    <view class="cell_line">
+        <view class="line_sign"></view>
+        边远艰苦地区年限
+    </view>
+    <view class="select_item">
+        <view class="select_item_name">三类边远艰苦地区</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
         </view>
     </view>
+    <view class="tooltip">* 三类岛 *</view>
+    <view class="select_item">
+        <view class="select_item_name">四类边远艰苦地区</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+    </view>
+    <view class="tooltip">* 海拔2500米至3500米、二类岛服役 *</view>
+    <view class="select_item">
+        <view class="select_item_name">五类边远艰苦地区</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+    </view>
+    <view class="tooltip">* 海拔3500米至4500米、一类岛服役 *</view>
+    <view class="select_item">
+        <view class="select_item_name">六类边远艰苦地区</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+    </view>
+    <view class="tooltip">* 海拔4500米以上地区、特类岛 *</view>
+    <view class="tooltip">* 年限累计相加后、向上取整 *</view>
 
     <!-- 特殊岗位年限 -->
-    <view class="item_cell_box">
-        <view class="menu_cell_title">特殊岗位年限</view>
-        <view class="menu_cell_list">
-            <view class="cell_item_bar">
-                <view class="cell_item_title">飞行</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="aircraftFn" value="{{save_data.aircraft_index}}" range="{{special_post.aircraft}}" range-key="name">
-                        {{special_post.aircraft[save_data.aircraft_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
-            <view class="cell_item_bar">
-                <view class="cell_item_title">舰艇</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="navalVesselsFn" value="{{save_data.naval_vessels_index}}" range="{{special_post.naval_vessels}}" range-key="name">
-                        {{special_post.naval_vessels[save_data.naval_vessels_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
-            <view class="cell_item_bar">
-                <view class="cell_item_title">涉核</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="nuclearInvolvementFn" value="{{save_data.nuclear_involvement_index}}" range="{{special_post.nuclear_involvement}}" range-key="name">
-                        {{special_post.nuclear_involvement[save_data.nuclear_involvement_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
+    <view class="cell_line">
+        <view class="line_sign"></view>
+        特殊岗位年限
+    </view>
+    <view class="select_item bottom_border">
+        <view class="select_item_name">飞行</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+    </view>
+    <view class="select_item bottom_border">
+        <view class="select_item_name">舰艇</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+    </view>
+    <view class="select_item">
+        <view class="select_item_name">涉核</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+    </view>
+    <view class="tooltip">* 年限累计相加后、向上取整 *</view>
+
+    <!-- 滞留扣分 -->
+    <view class="cell_line">
+        <view class="line_sign"></view>
+        滞留扣分
+    </view>
+    <view class="select_item">
+        <view class="select_item_name">个人原因不报道</view>
+        <view class="select_item_cell">
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+                {{save_data.start_text}}
+            </picker>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
         </view>
     </view>
 
-    <!-- 滞留扣分 -->
-    <view class="item_cell_box">
-        <view class="menu_cell_title">
-            <view class="item_line"></view>滞留扣分</view>
-        <view class="menu_cell_list">
-            <view class="cell_item_bar">
-                <view class="cell_item_title">个人原因不报到</view>
-                <view class="cell_item">
-                    <picker class="item_select" bindchange="retentionFn" value="{{save_data.retention_index}}" range="{{retention}}" range-key="name">
-                        {{retention[save_data.retention_index].name}}
-                    </picker>
-                    <view class="triangle_icons"></view>
-                </view>
-            </view>
-        </view>
-    </view>
-    <view class="sub_btn" bindtap="subFn">提交</view>
+    <view class="submit_btn">提交</view>
 </view>

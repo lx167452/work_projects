@@ -1,0 +1,25 @@
+<view class="container">
+    <view class="username mt8 padding30">姓名：{{username}}</view>
+    <view class="username padding30">您的考核分：<text class="check_score">{{score}}分</text></view>
+    <!-- 安置地点 -->
+    <view class="menu_cell">
+        <view class="menu_cell_title">安置地点</view>
+        <view class="menu_cell_bar">
+            <view class="select_items">
+                <picker class="item_cell" bindchange="placeSelectFn" value="{{place_index}}" range="{{placeData}}">
+                    {{placeData[place_index]}}
+                </picker>
+                <view class="triangle_icons"></view>
+            </view>
+        </view>
+    </view>
+    <view class="cell_item">
+        <view class="cell_title">您的综合成绩实时排名</view>
+        <view class="cell_text">{{ranking}}名</view>
+    </view>
+    <view class="cell_item">
+        <view class="cell_title">您的总分</view>
+        <view class="cell_text">{{total_score}}分</view>
+    </view>
+    <view class="statistics">安置地参入统计人数：<text class="count_nums">{{countNumn}}人</text></view>
+</view>

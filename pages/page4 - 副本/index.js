@@ -1,7 +1,6 @@
 let App = getApp();
 Page({
     data: {
-        imgUrl: App.globalData.imgUrl, // 图片的地址
         username: "啦啦啦", // 姓名
         placeData: ["武汉地区", "省直", "武汉", "黄石", "十堰", "宜昌", "襄阳", "鄂州", "随州", "咸宁", "黄冈", "荆门", "荆州", "恩施自治州", "天门", "仙桃", "潜江", "神农架林区"], // 安置地点
         place_index: 0, // 安置地点选中的下标
@@ -90,6 +89,6 @@ Page({
             wx.redirectTo({ url: '../authorize/index' });
             return false;
         }
-        // that.requireFn();
+        that.requireFn();
     }
 })

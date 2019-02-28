@@ -2,7 +2,6 @@ let App = getApp();
 Page({
     // 数据 (页面所需数据均需在这里声明，可用于模板数据绑定)
     data: {
-        imgUrl: App.globalData.imgUrl, // 图片的地址
         answer: 0 // 0没有作答，1已经作答
     },
     /**

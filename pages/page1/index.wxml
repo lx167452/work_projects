@@ -1,9 +1,28 @@
 <view class="container">
-    <view class="title">湖北省军转安置考试分数统计系统</view>
-    <view class="menu_box">
-        <view class="menu_item" bindtap="calculationFn">考核分计算</view>
-        <view class="menu_item" bindtap="seeScoreFn" data-type="ranking">查看考核分数排名</view>
-        <view class="menu_item" bindtap="seeScoreFn" data-type="colligate">查看综合成绩排名</view>
+    <view class="head_nav" style="background:url('{{imgUrl}}/head_bg.png') no-repeat;background-size:contain;"></view>
+    <view class="main_container">
+        <view class="item_cell" bindtap="calculationFn">
+            <view class="item_block">
+                <view class="item_cell_icon" style="background:url('{{imgUrl}}/assess_icon.png') no-repeat;background-size:contain;"></view>
+                <text class="item_cell_text">考核分数计算</text>
+            </view>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+        <view class="item_cell" bindtap="seeScoreFn" data-type="ranking">
+            <view class="item_block">
+                <view class="item_cell_icon" style="background:url('{{imgUrl}}/assessment_score.png') no-repeat;background-size:contain;"></view>
+                <text class="item_cell_text">查看考核分数成绩</text>
+            </view>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+        <view class="item_cell" bindtap="seeScoreFn" data-type="colligate">
+            <view class="item_block">
+                <view class="item_cell_icon" style="background:url('{{imgUrl}}/colligate_score.png') no-repeat;background-size:contain;"></view>
+                <text class="item_cell_text">查看综合成绩排名</text>
+            </view>
+            <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
+        </view>
+        <view class="tooltip">本程序供个人测算使用，具体考核分及排名以官方公布为准。</view>
+        <view class="copyright">®知问教育 版权所有</view>
     </view>
-    <view class="tips_text">本程序供个人测算使用，具体考核分及排名，以官方公布为准。</view>
 </view>

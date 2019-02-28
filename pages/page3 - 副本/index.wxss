@@ -1,0 +1,127 @@
+.container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #fff;
+    overflow: auto;
+}
+
+.container .menu_cell {
+    height: 66rpx;
+    line-height: 66rpx;
+    display: flex;
+    align-items: center;
+    margin-top: 34rpx;
+    padding-left: 30rpx;
+}
+
+.container .menu_cell_title {
+    width: 166rpx;
+    text-indent: 24rpx;
+    font-size: 28rpx;
+    color: #333333;
+    font-weight: bold;
+}
+
+.container .menu_cell_bar {
+    align-items: center;
+    height: 80rpx;
+    line-height: 80rpx;
+}
+
+.container .select_items {
+    width: 500rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    border: 2rpx solid #BABABA;
+    display: flex;
+    position: relative;
+}
+
+.container .menu_cell_bar .item_cell {
+    /* width: 452rpx; */
+    width: 100%;
+    z-index: 4;
+    font-size: 26rpx;
+    text-indent: 18rpx;
+    position: relative;
+    top: -1rpx;
+    right: 2rpx;
+    overflow: hidden;
+    color: #333333;
+    font-size: 28rpx;
+    font-weight: bold;
+}
+
+.container .triangle_icons {
+    width: 56rpx;
+    height: 56rpx;
+    background: url("http://files.nacy.cc/triangle_icons.png") no-repeat;
+    background-size: contain;
+    position: absolute;
+    right: 0;
+    top: 10rpx;
+    background-color: #fff;
+}
+
+.container .padding30 {
+    padding: 0 30rpx;
+}
+
+.input_item {
+    display: flex;
+    align-items: center;
+    height: 80rpx;
+    line-height: 80rpx;
+    margin-top: 32rpx;
+}
+
+.input_item .item_text {
+    width: 166rpx;
+    text-indent: 24rpx;
+    font-size: 28rpx;
+    color: #333333;
+    font-weight: bold;
+}
+
+.input_item .input_bar {
+    border: 2rpx solid #CECECE;
+    padding: 12rpx 12rpx;
+    width: 472rpx;
+}
+
+.input_item .input_bar input {
+    font-size: 32rpx;
+    color: #000;
+}
+
+.container .tips_text {
+    margin: 42rpx auto 0;
+    padding: 0 30rpx;
+    font-size: 26rpx;
+    color: #666666;
+    display: flex;
+}
+
+.container .tips_text .titles {
+    width: 144rpx;
+}
+
+.container .reminder {
+    color: #666666;
+    display: inline-block;
+}
+
+.container .sub_btn {
+    width: 600rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    background: #2695CD;
+    color: #fff;
+    font-size: 32rpx;
+    margin: 506rpx auto 0;
+    border-radius: 12rpx;
+}

@@ -4,107 +4,101 @@
     position: absolute;
     left: 0;
     top: 0;
+    background: #F4F4F4;
     overflow: auto;
-    background: #fff;
+    -webkit-overflow-scrolling: touch;
 }
 
-.container .menu_cell {
-    height: 80rpx;
-    line-height: 80rpx;
+.class_rank_box {
     display: flex;
-    padding: 16rpx 30rpx;
+    flex: 1;
 }
 
-.container .menu_cell_title {
-    font-size: 28rpx;
-    width: 130rpx;
-}
-
-.container .menu_cell_bar {
-    display: flex;
-}
-
-.container .select_items {
-    width: 452rpx;
-    border: 2rpx solid #E7E7E7;
-    display: flex;
-    position: relative;
-}
-
-.container .menu_cell_bar .item_cell {
-    /* width: 452rpx; */
+.assessment_block {
     width: 100%;
-    z-index: 4;
-    font-size: 26rpx;
-    text-indent: 18rpx;
-    position: relative;
-    top: -1rpx;
-    overflow: hidden;
+    height: 202rpx;
+    margin-top: 25rpx;
+    background: #FFFFFF;
+    flex: 1;
 }
 
-.container .triangle_icons {
-    width: 56rpx;
-    height: 56rpx;
-    background: url("http://files.nacy.cc/triangle_icons.png") no-repeat;
-    background-size: contain;
-    position: absolute;
-    right: 0;
-    top: 10rpx;
-    background-color: #fff;
-}
-
-.padding30 {
-    padding: 0 30rpx;
-}
-
-.mt8 {
-    margin-top: 8rpx;
-}
-
-.username {
+.assessment_block .assessment_score {
+    padding-top: 20rpx;
     display: flex;
-    height: 58rpx;
-    line-height: 58rpx;
-    font-size: 28rpx;
-    color: #333333;
+    align-items: baseline;
+    justify-content: center;
 }
 
-.check_score {
-    font-size: 28rpx;
-    color: #2695CD;
-}
-
-.cell_item {
-    width: 600rpx;
-    margin: 46rpx auto 0;
-    border: 2rpx solid #E5E5E5;
-    border-radius: 10rpx;
-}
-
-.cell_item .cell_title {
-    margin-top: 46rpx;
-    text-align: center;
-    font-size: 28rpx;
-    color: #333333;
-}
-
-.cell_item .cell_text {
-    text-align: center;
-    font-size: 60rpx;
+.assessment_block .assessment_score .score {
+    color: #E52229;
+    font-size: 72rpx;
     font-weight: bold;
-    color: #2695CD;
-    margin-top: 16rpx;
-    margin: 18rpx auto 112rpx;
 }
 
-.statistics {
+.assessment_block .tips_text {
+    font-size: 26rpx;
+    color: #999999;
     text-align: center;
+    position: relative;
+    top: -6rpx;
+}
+
+
+/* 输入框项 */
+
+.input_block {
+    background: #fff;
+    padding: 0 30rpx;
+    margin-top: 24rpx;
+}
+
+.input_block .input_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 96rpx;
+    border-bottom: 2rpx solid #F4F4F4;
+    position: relative;
+}
+
+.input_block .input_item .input_name {
+    font-size: 28rpx;
+    color: #666666;
+}
+
+.input_block .input_item .input_cell {
+    display: flex;
+    align-items: center;
+}
+
+.input_block .input_cell input {
+    width: 360rpx;
     font-size: 28rpx;
     color: #333333;
-    margin-top: 142rpx;
+    text-align: right;
 }
 
-.count_nums {
-    font-size: 28rpx;
-    color: #2695CD;
+.input_block .input_item .picker {
+    width: 100%;
+    height: 96rpx;
+    line-height: 96rpx;
+    position: absolute;
+    left: 0;
+    text-align: right;
+    top: 0;
+}
+
+.census_item {
+    display: flex;
+    height: 96rpx;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24rpx;
+    padding: 0 30rpx;
+    color: #666666;
+    background: #FFFFFF;
+}
+
+.census_item .number {
+    color: #333333;
 }

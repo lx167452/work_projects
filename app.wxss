@@ -6,3 +6,6 @@
 
 @import 'assets/styles/weui.wxss';
 @import 'assets/styles/skyvow.wxss';
+.hide {
+    display: none !important;
+}

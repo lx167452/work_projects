@@ -1,7 +1,6 @@
 let App = getApp();
 Page({
     data: {
-        imgUrl: App.globalData.imgUrl, // 图片的地址
         service_length: { // 服役年限
             start_time: "1970-01-01", // 开始时间
             end_time: "" // 结束时间

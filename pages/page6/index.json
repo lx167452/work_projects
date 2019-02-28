@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "综合成绩排名"
+    "navigationBarTitleText": "综合成绩排名",
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#fff",
+    "disableScroll": true
 }

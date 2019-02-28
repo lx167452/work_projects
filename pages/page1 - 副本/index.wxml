@@ -1,0 +1,9 @@
+<view class="container">
+    <view class="title">湖北省军转安置考试分数统计系统</view>
+    <view class="menu_box">
+        <view class="menu_item" bindtap="calculationFn">考核分计算</view>
+        <view class="menu_item" bindtap="seeScoreFn" data-type="ranking">查看考核分数排名</view>
+        <view class="menu_item" bindtap="seeScoreFn" data-type="colligate">查看综合成绩排名</view>
+    </view>
+    <view class="tips_text">本程序供个人测算使用，具体考核分及排名，以官方公布为准。</view>
+</view>

@@ -1,8 +1,6 @@
 let App = getApp();
 Page({
     data: {
-        imgUrl: App.globalData.imgUrl, // 图片的地址
-        assessment_score: '', // 考核分
         travel_test: '', // 行测
         exposition: '' // 申论
     },
@@ -11,14 +9,6 @@ Page({
      */
     trimFn(str) {
         return str.replace(/(^\s*)|(\s*$)/g, '');
-    },
-    /**
-     * 考核分
-     */
-    assessmentScoreFn() {
-        let that = this;
-        let assessment_score = that.trimFn(e.detail.value);
-        that.setData({ assessment_score: assessment_score });
     },
     /**
      * 行测

@@ -1,6 +1,7 @@
 let App = getApp();
 Page({
     data: {
+        imgUrl: App.globalData.imgUrl, // 图片的地址
         username: "啦啦啦", // 姓名
         phone: '', // 电话
         score: 42.5, // 考核分
@@ -35,7 +36,7 @@ Page({
             if (result.code == 1) {
                 App._post('api/index/multiple', { data: JSON.stringify(data) }, function(result) {
                     if (result.code == 1) {
-                         that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count });
+                        that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count });
 
                     }
                 }, function(result) {
