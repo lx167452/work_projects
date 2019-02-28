@@ -91,10 +91,6 @@ Page({
             wx.redirectTo({ url: '../authorize/index' });
             return false;
         }
-<<<<<<< HEAD
         that.requireFn();
-=======
-         that.requireFn();
->>>>>>> a4862b272860a706eae66a1a99e3990b32143b31
     }
 })
