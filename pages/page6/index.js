@@ -63,7 +63,8 @@ Page({
             if (result.code == 1) {
                 // console.log('success');
                 console.log(result.data);
-                that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count, zhiwu: parseInt(result.data.zhiwu) });
+                // that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count, zhiwu: parseInt(result.data.zhiwu) });
+                that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.r_score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count, zhiwu: parseInt(result.data.zhiwu) });
             }
         }, function(result) {
             // console.log("fail");
