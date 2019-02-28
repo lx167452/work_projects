@@ -449,7 +449,7 @@ Page({
             score: score, // 考核分
             fuyi: yearNumber,
             fuyi_starttime: that.data.service_length.start_time, // 服役开始时间
-            fuyi_endtime: that.data.service_length.end_time + '03月31日', // 服役结束时间
+            fuyi_endtime: that.data.service_length.end_time, // 服役结束时间
             type: post_type, // 职务选中的类型 (0行政职务，1专业等级)
             // dengji: job_index, // 职务等级
             zhiwu: job_index, // 职务等级
@@ -472,7 +472,6 @@ Page({
             zhiliu: that.data.save_data.retention_index, // 滞留
             openId: openId
         };
-        console.log(data);
         App._post('api/index/test', { data: JSON.stringify(data) }, function(result) {
             if (result.code == 1) {
                 console.log("success");
