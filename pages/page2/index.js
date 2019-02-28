@@ -550,9 +550,11 @@ Page({
                     // let end_arr = result.data.end_time.split('-'); // 结束时间字符串分割
                     // end_text = end_arr[0] + '年' + end_arr[1] + '月' + end_arr[2] + '日';
                     // let end_time = end_arr[0] + '-03-31';
+                    let end_time_format = '1970-03-31'; // 结束时间格式
                     let end_year = result.data.now_time.split('-')[0];
                     end_text = end_year + '年03月31日';
                     that.setData({
+                        "service_length.end_time_format": end_time_format, // 结束时间格式
                         'service_length.start_time': start_time, // 开始时间 (服役年限)
                         'save_data.start_text': start_text, // 开始时间字符串 (服役年限)
                         'service_length.end_time': end_time_year, // 结束时间 (服役年限)

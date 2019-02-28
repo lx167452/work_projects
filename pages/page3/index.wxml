@@ -11,7 +11,7 @@
         <view class="input_item">
             <view class="input_name">姓名</view>
             <view class="input_cell">
-                <input name="username" class="username" type="text" value="{{username}}" placeholder="请输入姓名" maxlength="16" focus="true" bindinput="usernameFn" />
+                <input name="username" class="username" type="text" value="{{username}}" placeholder="请输入姓名" maxlength="16" bindinput="usernameFn" />
             </view>
         </view>
         <view class="input_item">

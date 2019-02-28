@@ -42,7 +42,7 @@ Page({
     submitFn(e) {
         let that = this;
         // 验证填写的内容项
-        if (that.data.assessment_score == '') {
+        if (!that.data.assessment_score) {
             wx.showToast({ title: '请先填写考核分', icon: 'none', duration: 1500 });
             return false;
         } else if (!that.data.travel_test) {
@@ -52,11 +52,42 @@ Page({
             wx.showToast({ title: '请先填写申论成绩', icon: 'none', duration: 1500 });
             return false;
         }
+        let assessment_score = 0; // 考核分
+        let travel_test = 0; // 行测成绩
+        let exposition = 0; // 申论成绩
+
+        let temp_assessment_score = parseFloat(that.data.assessment_score);
+        if (isNaN(temp_assessment_score)) {
+            wx.showToast({ title: '考核分数只能为整数或小数', icon: 'none', duration: 1500 });
+            return false;
+        } else {
+            assessment_score = temp_assessment_score <= 0 ? 0 : temp_assessment_score.toFixed(2);
+        }
+        let temp_travel_test = parseFloat(that.data.travel_test);
+        if (isNaN(temp_travel_test)) {
+            wx.showToast({ title: '行测成绩只能为整数或小数', icon: 'none', duration: 1500 });
+            return false;
+        } else {
+            travel_test = temp_travel_test <= 0 ? 0 : temp_travel_test.toFixed(2);
+        }
+        let temp_exposition = parseFloat(that.data.exposition);
+        if (isNaN(temp_exposition)) {
+            wx.showToast({ title: '申论成绩只能为整数或小数', icon: 'none', duration: 1500 });
+            return false;
+        } else {
+            exposition = temp_exposition <= 0 ? 0 : temp_exposition.toFixed(2);
+        }
         let openId = wx.getStorageSync('openid') || '';
+        // let data = {
+        //     r_score: that.data.assessment_score, // 官方考核分
+        //     hangce: that.data.travel_test, // 行测
+        //     shenlun: that.data.exposition, // 申论
+        //     openId: openId
+        // };
         let data = {
-            r_score: that.data.assessment_score, // 官方考核分
-            hangce: that.data.travel_test, // 行测
-            shenlun: that.data.exposition, // 申论
+            r_score: assessment_score, // 官方考核分
+            hangce: travel_test, // 行测
+            shenlun: exposition, // 申论
             openId: openId
         };
         App._post('api/index/record', { data: JSON.stringify(data) }, function(result) {
