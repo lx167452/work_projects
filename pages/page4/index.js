@@ -90,6 +90,6 @@ Page({
             wx.redirectTo({ url: '../authorize/index' });
             return false;
         }
-        // that.requireFn();
+         that.requireFn();
     }
 })
