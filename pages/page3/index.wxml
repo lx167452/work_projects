@@ -11,13 +11,13 @@
         <view class="input_item">
             <view class="input_name">姓名</view>
             <view class="input_cell">
-                <input type="text" placeholder="请输入姓名" />
+                <input name="username" class="username" type="text" value="{{username}}" placeholder="请输入姓名" maxlength="16" focus="true" bindinput="usernameFn" />
             </view>
         </view>
         <view class="input_item">
             <view class="input_name">电话</view>
             <view class="input_cell">
-                <input type="text" placeholder="请输入电话" />
+                <input name="tel" class="username" type="number" value="{{tel}}" placeholder="请输入电话" maxlength="11" bindinput="telFn" />
             </view>
         </view>
         <view class="input_item">
@@ -41,5 +41,5 @@
             <text class="tooltip_text">程序皆在为湖北安置的退役军官提供方便，请输入真实姓名、电话以及安置地点，以保证平台数据的真实性，一旦发现恶意填写，平台会自动封号，您将永远无法使用本程序。非当年度安置转业干部，请勿填写和提交数据信息，以免系统封号。</text>
         </view>
     </view>
-    <view class="submit_btn">确认提交数据并查看</view>
+    <view class="submit_btn" bindtap="submitFn">确认提交数据并查看</view>
 </view>

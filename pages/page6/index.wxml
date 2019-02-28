@@ -4,19 +4,19 @@
         <view class="input_item">
             <view class="input_name">姓名</view>
             <view class="input_cell">
-                <input type="text" name="username" value="{{username}}" placeholder="请输入姓名" autocomplete="off" />
+                {{username}}
             </view>
         </view>
         <view class="input_item">
             <view class="input_name">您的考核分</view>
             <view class="input_cell">
-                <input type="text" name="assessment_score" value="{{score}}" placeholder="请输入考核分" autocomplete="off" />分
+                {{score}}分
             </view>
         </view>
         <view class="input_item">
             <view class="input_name">排名分类</view>
             <view class="input_cell">
-                <input type="text" name="ranking" value="副团职" placeholder="请输入排名分类" autocomplete="off" />
+                副团职
             </view>
         </view>
         <view class="input_item">

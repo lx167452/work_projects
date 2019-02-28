@@ -72,6 +72,11 @@
     height: 34rpx;
 }
 
+.select_item input {
+    text-align: right;
+    padding-right: 16rpx;
+}
+
 
 /* 温馨提示 */
 

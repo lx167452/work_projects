@@ -78,9 +78,12 @@ Page({
      */
     endTimeFn(e) {
         let that = this;
-        let end_arr = e.detail.value.split('-'); // 结束时间字符串分割
-        let end_text = end_arr[0] + '年' + end_arr[1] + '月' + end_arr[2] + '日'; // 结束时间字符串
-        that.setData({ 'save_data.end_text': end_text, 'service_length.end_time': e.detail.value });
+        // let end_arr = e.detail.value.split('-'); // 结束时间字符串分割
+        // let end_text = end_arr[0] + '年' + end_arr[1] + '月' + end_arr[2] + '日'; // 结束时间字符串
+        // that.setData({ 'save_data.end_text': end_text, 'service_length.end_time': e.detail.value });
+        let end_time = e.detail.value + '-03-31'; // 结束时间字符串
+        let end_text = e.detail.value + '年03月31日'; // 结束时间字符串
+        that.setData({ 'save_data.end_text': end_text, 'service_length.end_time': end_time });
     },
     /**
      * 职务 - 行政职务
@@ -229,16 +232,29 @@ Page({
         let end_month = end_time_diff[1];
         let end_day = end_time_diff[2];
         let yearNumber = 0;
-        if (end_time_diff != start_time_diff) {
-            if (end_month == start_month && end_day == start_day) {
-                yearNumber = end_year - start_year;
-            } else {
+        if (end_year > start_year) {
+            // 年份大于
+            if ((end_month > start_month) || (end_month == start_month && end_day >= start_day)) {
                 yearNumber = (end_year - start_year) + 1;
+                return yearNumber;
+            } else {
+                yearNumber = end_year - start_year;
+                return yearNumber;
+            }
+        } else if (end_year == start_year) {
+            // 年份等于
+            if ((end_month > start_month) || (end_month == start_month && end_day >= start_day)) {
+                yearNumber = 1;
+                return yearNumber;
+            } else {
+                wx.showToast({ title: '服务年限结束时间不能小于开始时间', icon: 'none', duration: 1500 });
+                return false;
             }
         } else {
-            yearNumber = 1;
+            // 年份小于
+            wx.showToast({ title: '服务年限结束时间不能小于开始时间', icon: 'none', duration: 1500 });
+            return false;
         }
-        return yearNumber;
     },
     /**
      * 处理服役年限问题
@@ -326,7 +342,7 @@ Page({
                     "save_data.start_text": start_text, // 开始时间字符串 (服役年限)
                     "save_data.end_text": end_text, // 结束时间字符串 (服役年限)
                     "service_length.start_time": result.data.start_time, // 开始时间 (服役年限)
-                    "service_length.end_time": result.data.end_time, // 结束时间 (服役年限)
+                    "service_length.end_time": result.data.end_time + '03月31日', // 结束时间 (服役年限)
                     "save_data.administration_post_index": administration_post_index, // 行政职务 (职务)
                     "save_data.expertise": expertise_index, // 专业技术 (职务)
                     "post_type": result.data.type, // 职务选中的类型 (0行政职务，1专业等级)
@@ -370,7 +386,7 @@ Page({
         let post_type = that.data.post_type; // 选择职务的类型
         let job_index = post_type == 0 ? that.data.save_data.administration_post_index : that.data.save_data.expertise_index; // 选中职务或等级选中的下标
         // 计算分数 (惩处和滞留-扣分) (服役年限算分: 8年以内(含8年)，每1年计0.8分；9至15年包含15，从第9年起，每1年计1分；16年以上，从第16年起，每1年计1.2分)
-        let yearNumber = that.timeDifference(that.data.service_length.end_time, that.data.service_length.start_time); // 相差的年份
+        // let yearNumber = that.timeDifference(that.data.service_length.end_time, that.data.service_length.start_time); // 相差的年份
         // 验证填写直接录入扣分项的内容
         if (that.data.save_data.direct_entry_deduction_index == '' || that.data.save_data.direct_entry_deduction_index < 0) {
             wx.showToast({ title: '请先填写直接录入扣分项', icon: 'none', duration: 1500 });
@@ -382,6 +398,7 @@ Page({
             wx.showToast({ title: '服务年限结束时间不能小于开始时间', icon: 'none', duration: 1500 });
             return false;
         }
+        let yearNumber = that.timeDifference(that.data.service_length.end_time, that.data.service_length.start_time); // 相差的年份
         // 服役年限分数处理
         let service_length_source = 0;
         if (yearNumber >= 16) {
@@ -432,7 +449,7 @@ Page({
             score: score, // 考核分
             fuyi: yearNumber,
             fuyi_starttime: that.data.service_length.start_time, // 服役开始时间
-            fuyi_endtime: that.data.service_length.end_time, // 服役结束时间
+            fuyi_endtime: that.data.service_length.end_time + '03月31日', // 服役结束时间
             type: post_type, // 职务选中的类型 (0行政职务，1专业等级)
             // dengji: job_index, // 职务等级
             zhiwu: job_index, // 职务等级
@@ -509,11 +526,13 @@ Page({
                     let start_arr = start_time.split('-'); // 开始时间字符串分割
                     let end_arr = result.data.end_time.split('-'); // 结束时间字符串分割
                     start_text = start_arr[0] + '年' + start_arr[1] + '月' + start_arr[2] + '日';
-                    end_text = end_arr[0] + '年' + end_arr[1] + '月' + end_arr[2] + '日';
+                    // end_text = end_arr[0] + '年' + end_arr[1] + '月' + end_arr[2] + '日';
+                    let end_time = end_arr[0] + '-03-31';
+                    end_text = end_arr[0] + '年03月31日';
                     that.setData({
                         'service_length.start_time': start_time, // 开始时间 (服役年限)
                         'save_data.start_text': start_text, // 开始时间字符串 (服役年限)
-                        'service_length.end_time': result.data.end_time, // 结束时间 (服役年限)
+                        'service_length.end_time': end_time, // 结束时间 (服役年限)
                         'save_data.end_text': end_text, // 结束时间字符串 (服役年限)
 
                         'post.administration_post': result.data.administration_post, // 行政职务 (职务)
