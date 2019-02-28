@@ -340,14 +340,15 @@ Page({
                 let start_text = ''; // 开始时间字符串
                 let start_arr = result.data.start_time.split('-'); // 开始时间字符串分割
                 start_text = start_arr[0] + '年' + start_arr[1] + '月' + start_arr[2] + '日';
+                let end_time_data = result.data.end_time.split('-'); // 结束时间字符串
                 let end_text = '1970年03月31日'; // 结束时间字符串
                 let end_time_format = '1970-03-31'; // 结束时间格式
-                let temp_end_time = start_arr[0]; // 年份
+                let temp_end_time = end_time_data[0]; // 年份
                 let end_time_index = that.data.service_length.end_time.indexOf(temp_end_time + '年') > 0 ? that.data.service_length.end_time.indexOf(temp_end_time + '年') : 0; // 时间年份的索引
                 if (end_time_index >= 0) {
                     that.data.service_length.end_time[end_time_index]; // 结束时间的年份
                     end_text = temp_end_time + '年03月31日';
-                    end_time_format = temp_end_time + '03-31';
+                    end_time_format = temp_end_time + '-03-31';
                 }
                 let entry_score = parseInt(result.data.direct_entry_deduction) > 0 ? parseInt(result.data.direct_entry_deduction) : 0; // 直接录入分数冗余处理
                 that.setData({
@@ -402,10 +403,10 @@ Page({
         // 计算分数 (惩处和滞留-扣分) (服役年限算分: 8年以内(含8年)，每1年计0.8分；9至15年包含15，从第9年起，每1年计1分；16年以上，从第16年起，每1年计1.2分)
         // let yearNumber = that.timeDifference(that.data.service_length.end_time, that.data.service_length.start_time); // 相差的年份
         // 验证填写直接录入扣分项的内容
-        if (that.data.save_data.direct_entry_deduction_index == '' || that.data.save_data.direct_entry_deduction_index < 0) {
-            wx.showToast({ title: '请先填写直接录入扣分项', icon: 'none', duration: 1500 });
-            return false;
-        }
+        // if (that.data.save_data.direct_entry_deduction_index == '') {
+        //     wx.showToast({ title: '请先填写直接录入扣分项', icon: 'none', duration: 1500 });
+        //     return false;
+        // }
         // 处理服务年限问题
         let flagStatus = that.yearsHandleFn();
         if (!flagStatus) {
@@ -458,6 +459,7 @@ Page({
             score = 0; // 冗余处理
         }
         let openId = wx.getStorageSync('openid') || '';
+        let entry_score = parseFloat(that.data.save_data.direct_entry_deduction_index) > 0 ? parseFloat(that.data.save_data.direct_entry_deduction_index) : 0;
         let data = {
             weixin: nickName, // 微信昵称
             score: score, // 考核分
@@ -473,7 +475,8 @@ Page({
             erdeng: that.data.save_data.two_glory_index, // 二等功
             sandeng: that.data.save_data.three_glory_index, // 三等功
             chufen: that.data.save_data.disposition_type_index, // 处分类型
-            geren: parseFloat(that.data.save_data.direct_entry_deduction_index), // 直接录入扣分
+            // geren: parseFloat(that.data.save_data.direct_entry_deduction_index), // 直接录入扣分
+            geren: entry_score, // 直接录入扣分
             zuigao: that.data.save_data.highest_education_index, // 最高学历
             ruwu: that.data.save_data.before_enlisting_education_index, // 入伍前学历
             sanlei: that.data.save_data.three_category_index, // 三类地区

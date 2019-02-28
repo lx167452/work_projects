@@ -96,6 +96,7 @@ Page({
             if (result.code == 1) {
                 let index = parseInt(result.data.anzhi) ? result.data.anzhi : 0;
                 that.setData({
+                    score: parseFloat(result.data.score),
                     username: result.data.name,
                     tel: result.data.phone,
                     place_index: index
