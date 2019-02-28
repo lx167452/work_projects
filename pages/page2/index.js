@@ -4,7 +4,9 @@ Page({
         imgUrl: App.globalData.imgUrl, // 图片的地址
         service_length: { // 服役年限
             start_time: "1970-01-01", // 开始时间
-            end_time: "" // 结束时间
+            end_time: [], // 结束时间
+            end_time_format: '', // 结束时间格式
+            end_time_index: 0 // 结束时间的下标
         },
         post: { // 职务
             administration_post: [], // 行政职务
@@ -42,7 +44,7 @@ Page({
 
         save_data: { // 当前下拉或更改及默认值
             start_text: '1970年01月01日', // 开始时间 (服役年限)
-            end_text: '2018年08月28日', // 结束时间 (服役年限)
+            end_text: '2019年03月31日', // 结束时间 (服役年限)
             administration_post_index: 0, // 行政职务 (职务)
             expertise_index: 0, // 专业技术 (职务)
             leading_post_index: 0, // 领导职务 (职务)
@@ -78,12 +80,11 @@ Page({
      */
     endTimeFn(e) {
         let that = this;
-        // let end_arr = e.detail.value.split('-'); // 结束时间字符串分割
-        // let end_text = end_arr[0] + '年' + end_arr[1] + '月' + end_arr[2] + '日'; // 结束时间字符串
-        // that.setData({ 'save_data.end_text': end_text, 'service_length.end_time': e.detail.value });
-        let end_time = e.detail.value + '-03-31'; // 结束时间字符串
-        let end_text = e.detail.value + '年03月31日'; // 结束时间字符串
-        that.setData({ 'save_data.end_text': end_text, 'service_length.end_time': end_time });
+        let end_year_index = parseInt(e.detail.value);
+        let end_text = service_length.end_time[end_year_index] + '03月31日';
+        let temp_year = service_length.end_time[end_year_index].substring(0, service_length.end_time[end_year_index].length - 1);
+        let end_time_format = temp_year + '-03-31';
+        that.setData({ 'save_data.end_text': end_text, 'service_length.end_time_index': end_year_index, 'service_length.end_time_format': end_time_format });
     },
     /**
      * 职务 - 行政职务
@@ -262,7 +263,7 @@ Page({
     yearsHandleFn() {
         let that = this;
         let start_time = that.data.service_length.start_time;
-        let end_time = that.data.service_length.end_time;
+        let end_time = that.data.service_length.end_time_format;
         let start_time_diff = start_time.split('-'); // 开始时间
         let end_time_diff = end_time.split('-'); // 结束时间
         let start_year = start_time_diff[0];
@@ -337,12 +338,21 @@ Page({
                 }
                 // 开始和结束时间显示处理
                 let start_text = ''; // 开始时间字符串
-                let end_text = ''; // 结束时间字符串
                 let start_arr = result.data.start_time.split('-'); // 开始时间字符串分割
-                let end_arr = result.data.end_time.split('-'); // 结束时间字符串分割
                 start_text = start_arr[0] + '年' + start_arr[1] + '月' + start_arr[2] + '日';
-                end_text = end_arr[0] + '年' + end_arr[1] + '月' + end_arr[2] + '日';
+                let end_text = '1970年03月31日'; // 结束时间字符串
+                let end_time_format = '1970-03-31'; // 结束时间格式
+                let temp_end_time = start_arr[0]; // 年份
+                let end_time_index = that.data.service_length.end_time.indexOf(temp_end_time + '年') > 0 ? that.data.service_length.end_time.indexOf(temp_end_time + '年') : 0; // 时间年份的索引
+                if (end_time_index >= 0) {
+                    that.data.service_length.end_time[end_time_index]; // 结束时间的年份
+                    end_text = temp_end_time + '年03月31日';
+                    end_time_format = temp_end_time + '03-31';
+                }
+                let entry_score = parseInt(result.data.direct_entry_deduction) > 0 ? parseInt(result.data.direct_entry_deduction) : 0; // 直接录入分数冗余处理
                 that.setData({
+                    "service_length.end_time_index": end_time_index, // 结束时间年份的索引
+                    "service_length.end_time_format": end_time_format, // 结束时间格式
                     "save_data.start_text": start_text, // 开始时间字符串 (服役年限)
                     "save_data.end_text": end_text, // 结束时间字符串 (服役年限)
                     "service_length.start_time": result.data.start_time, // 开始时间 (服役年限)
@@ -356,7 +366,7 @@ Page({
                     "save_data.two_glory_index": result.data.two_glory, // 二等功 (奖励计分)
                     "save_data.three_glory_index": result.data.three_glory, // 三等功 (奖励计分)
                     "save_data.disposition_type_index": result.data.disposition_type, // 处分类型 (惩处扣分)
-                    "save_data.direct_entry_deduction_index": result.data.direct_entry_deduction, // 直接录入扣分 (惩处扣分)
+                    "save_data.direct_entry_deduction_index": entry_score, // 直接录入扣分 (惩处扣分)
                     "save_data.highest_education_index": result.data.highest_education, // 最高学历 (学历)
                     "save_data.before_enlisting_education_index": result.data.before_enlisting_education, // 入伍前学历 学历
                     "save_data.three_category_index": result.data.three_category, // 三类边远艰苦地区(三类岛) (边远艰苦地区年限)
@@ -368,7 +378,7 @@ Page({
                     "save_data.nuclear_involvement_index": result.data.nuclear_involvement, // 涉核 (特殊岗位年限)
                     "save_data.retention_index": result.data.retention // 滞留扣分数据
                 });
-                console.log(that.data);
+                // console.log(that.data);
             }
         }, function(result) {
             console.log("fail");
@@ -403,7 +413,7 @@ Page({
             wx.showToast({ title: '服务年限结束时间不能小于开始时间', icon: 'none', duration: 1500 });
             return false;
         }
-        let yearNumber = that.timeDifference(that.data.service_length.end_time, that.data.service_length.start_time); // 相差的年份
+        let yearNumber = that.timeDifference(that.data.service_length.end_time_format, that.data.service_length.start_time); // 相差的年份
         // 服役年限分数处理
         let service_length_source = 0;
         if (yearNumber >= 16) {
@@ -454,7 +464,7 @@ Page({
             score: score, // 考核分
             fuyi: yearNumber,
             fuyi_starttime: that.data.service_length.start_time, // 服役开始时间
-            fuyi_endtime: that.data.service_length.end_time, // 服役结束时间
+            fuyi_endtime: that.data.service_length.end_time_format, // 服役结束时间
             type: post_type, // 职务选中的类型 (0行政职务，1专业等级)
             // dengji: job_index, // 职务等级
             zhiwu: job_index, // 职务等级
@@ -517,6 +527,12 @@ Page({
             return false;
         }
         let data = { openId: openId };
+        // 处理选择年份的问题
+        let k = 2200;
+        let end_time_year = [];
+        for (let n = 1970; n <= k; n++) {
+            end_time_year.push(n + '年');
+        }
         App._post('api/index/getList', { data: JSON.stringify(data) }, function(result) {
                 if (result.code == 1) {
                     console.log('success');
@@ -528,15 +544,16 @@ Page({
                     }
                     // 开始和结束时间显示处理 (服役年限)
                     let start_arr = start_time.split('-'); // 开始时间字符串分割
-                    let end_arr = result.data.end_time.split('-'); // 结束时间字符串分割
                     start_text = start_arr[0] + '年' + start_arr[1] + '月' + start_arr[2] + '日';
+                    // let end_arr = result.data.end_time.split('-'); // 结束时间字符串分割
                     // end_text = end_arr[0] + '年' + end_arr[1] + '月' + end_arr[2] + '日';
-                    let end_time = end_arr[0] + '-03-31';
-                    end_text = end_arr[0] + '年03月31日';
+                    // let end_time = end_arr[0] + '-03-31';
+                    let end_year = result.data.now_time.split('-')[0];
+                    end_text = end_year + '年03月31日';
                     that.setData({
                         'service_length.start_time': start_time, // 开始时间 (服役年限)
                         'save_data.start_text': start_text, // 开始时间字符串 (服役年限)
-                        'service_length.end_time': end_time, // 结束时间 (服役年限)
+                        'service_length.end_time': end_time_year, // 结束时间 (服役年限)
                         'save_data.end_text': end_text, // 结束时间字符串 (服役年限)
 
                         'post.administration_post': result.data.administration_post, // 行政职务 (职务)
@@ -572,6 +589,7 @@ Page({
                     if (parseInt(result.data.is_post)) {
                         that.selectedItemFn(); // 请求用户已经做答的选项
                     }
+                    console.log(that.data);
                 };
             },
             function(result) {

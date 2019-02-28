@@ -7,7 +7,8 @@
     <view class="select_item bottom_border">
         <view class="select_item_name">服役时间</view>
         <view class="select_item_cell">
-            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn">
+            <!-- <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" end="{{service_length.now_time}}" bindchange="startTimeFn"> -->
+            <picker class="item_cell picker" mode="date" value="{{service_length.start_time}}" start="1970-01-01" bindchange="startTimeFn">
                 {{save_data.start_text}}
             </picker>
             <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>
@@ -16,7 +17,11 @@
     <view class="select_item">
         <view class="select_item_name">退役时间</view>
         <view class="select_item_cell">
-            <picker class="item_cell picker" mode="date" fields="year" value="{{service_length.end_time}}" start="{{service_length.start_time}}" end="{{service_length.now_time}}" bindchange="endTimeFn">
+            <!-- <picker class="item_cell picker" mode="date" fields="year" value="{{service_length.end_time}}" start="{{service_length.start_time}}" end="{{service_length.now_time}}" bindchange="endTimeFn"> -->
+            <!-- <picker class="item_cell picker" mode="date" fields="year" value="{{service_length.end_time}}" start="{{service_length.start_time}}" bindchange="endTimeFn">
+                {{save_data.end_text}}
+            </picker> -->
+            <picker class="item_cell picker" value="{{service_length.end_time_index}}" range="{{service_length.end_time}}" bindchange="endTimeFn">
                 {{save_data.end_text}}
             </picker>
             <view class="right_arrow" style="background:url('{{imgUrl}}/right_arrow.png') no-repeat;background-size:contain;"></view>

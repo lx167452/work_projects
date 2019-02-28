@@ -13,11 +13,12 @@
                 {{score}}分
             </view>
         </view>
-        <view class="input_item" wx:if="{{zhiwu == 6 || zhiwu == 7}}">
+        <view class="input_item">
             <view class="input_name">排名分类</view>
-            <view class="input_cell">
+            <view class="input_cell" wx:if="{{zhiwu == 6 || zhiwu == 7}}">
                 {{zhiwu == 6? '副团职': '正团职'}}
             </view>
+            <view class="input_cell" wx:if="{{zhiwu != 6 && zhiwu != 7}}">一般干部</view>
         </view>
         <view class="input_item">
             <view class="input_name">安置地点</view>
