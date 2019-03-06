@@ -435,17 +435,17 @@ Page({
         let three_glory_score = parseInt(that.data.save_data.three_glory_index) >= 1 ? (parseFloat(that.data.bonus_score.three_glory[that.data.save_data.three_glory_index].score) * parseInt(that.data.save_data.three_glory_index)) : parseFloat(that.data.bonus_score.three_glory[that.data.save_data.three_glory_index].score); // 三等功
         let rewardCount = crack_glory_score + one_glory_score + two_glory_score + three_glory_score; // 奖励的总分
         let surplus_score = 0; // 多余分数计算处理
-        if (parseInt(that.data.save_data.crack_glory_index) > 0) { // 中央荣誉称号 60
-            if (rewardCount > 60) {
-                surplus_score = rewardCount - 60;
+        if (parseInt(that.data.save_data.crack_glory_index) > 0) { // 中央荣誉称号 65
+            if (rewardCount > 65) {
+                surplus_score = rewardCount - 65;
             }
-        } else if (parseInt(that.data.save_data.one_glory_index) > 0) { // 一等功 40
-            if (rewardCount > 40) {
-                surplus_score = rewardCount - 40;
+        } else if (parseInt(that.data.save_data.one_glory_index) > 0) { // 一等功 45
+            if (rewardCount > 45) {
+                surplus_score = rewardCount - 45;
             }
-        } else if (parseInt(that.data.save_data.two_glory_index) > 0) { // 二等功 25
-            if (rewardCount > 25) {
-                surplus_score = rewardCount - 25;
+        } else if (parseInt(that.data.save_data.two_glory_index) > 0) { // 二等功 30
+            if (rewardCount > 30) {
+                surplus_score = rewardCount - 30;
             }
         } else if (parseInt(that.data.save_data.three_glory_index) > 0) { // 三等功 15
             if (rewardCount > 15) {
@@ -550,8 +550,8 @@ Page({
                     // let end_arr = result.data.end_time.split('-'); // 结束时间字符串分割
                     // end_text = end_arr[0] + '年' + end_arr[1] + '月' + end_arr[2] + '日';
                     // let end_time = end_arr[0] + '-03-31';
-                    let end_time_format = '1970-03-31'; // 结束时间格式
                     let end_year = result.data.now_time.split('-')[0];
+                    let end_time_format = end_year + '-03-31'; // 结束时间格式
                     end_text = end_year + '年03月31日';
                     that.setData({
                         "service_length.end_time_format": end_time_format, // 结束时间格式
