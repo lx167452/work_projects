@@ -9,6 +9,7 @@ Page({
         score: 42.5, // 考核分
         countNumn: 122, // 统计人数
         zhiwu: 0, // 职务 6副团职  7正团职
+        type: 1 // 职务选中的类型 (0行政职务，1专业等级)
     },
     /**
      * 安置地点
@@ -27,7 +28,7 @@ Page({
         let data = { anzhi: that.data.place_index, openId: openId };
         App._post('api/index/examine', { data: JSON.stringify(data) }, function(result) {
             if (result.code == 1) {
-                that.setData({ username: result.data.name, ranking: result.data.ranking, score: result.data.score, countNumn: result.data.count, zhiwu: parseInt(result.data.zhiwu) });
+                that.setData({ username: result.data.name, ranking: result.data.ranking, score: result.data.score, countNumn: result.data.count, zhiwu: parseInt(result.data.zhiwu), type: result.data.type});
             }
             console.log(result);
             // console.log('success');
@@ -48,7 +49,7 @@ Page({
             if (result.code == 1) {
                 App._post('api/index/examine', { data: JSON.stringify(data) }, function(result) {
                     if (result.code == 1) {
-                        that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count });
+                        that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count, type: result.data.type });
 
                     }
                 }, function(result) {

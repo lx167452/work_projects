@@ -11,6 +11,7 @@ Page({
         total_score: 89, // 总分
         countNumn: 123, // 统计人数
         zhiwu: 0, // 职务 6副团职  7正团职
+        type: 1 // 职务选中的类型 (0行政职务，1专业等级)
     },
     /**
      * 安置地点
@@ -37,7 +38,7 @@ Page({
             if (result.code == 1) {
                 App._post('api/index/multiple', { data: JSON.stringify(data) }, function(result) {
                     if (result.code == 1) {
-                        that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count });
+                        that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count, type: result.data.type });
 
                     }
                 }, function(result) {
@@ -64,7 +65,7 @@ Page({
                 // console.log('success');
                 console.log(result.data);
                 // that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count, zhiwu: parseInt(result.data.zhiwu) });
-                that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.r_score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count, zhiwu: parseInt(result.data.zhiwu) });
+                that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.r_score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count, zhiwu: parseInt(result.data.zhiwu), type: result.data.type});
             }
         }, function(result) {
             // console.log("fail");
