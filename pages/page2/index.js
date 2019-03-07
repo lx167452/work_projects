@@ -332,9 +332,10 @@ Page({
                 let administration_post_index = 0; // 行政职务
                 let expertise_index = 0; // 专业等级
                 if (result.data.type == 0) {
-                    administration_post_index = parseInt(result.data.administration_post) > 0 ? result.data.administration_post : 0;
+                    administration_post_index = parseInt(result.data.administration_post) > 0 ? parseInt(result.data.administration_post) : 0;
                 } else {
-                    expertise_index = parseInt(result.data.expertise) > 0 ? result.data.expertise : 0;
+                    // expertise_index = parseInt(result.data.expertise) > 0 ? result.data.expertise : 0;
+                    expertise_index = parseInt(result.data.administration_post) > 0 ? parseInt(result.data.administration_post) : 0;
                 }
                 // 开始和结束时间显示处理
                 let start_text = ''; // 开始时间字符串
@@ -346,7 +347,7 @@ Page({
                 let temp_end_time = end_time_data[0]; // 年份
                 let end_time_index = that.data.service_length.end_time.indexOf(temp_end_time + '年') > 0 ? that.data.service_length.end_time.indexOf(temp_end_time + '年') : 0; // 时间年份的索引
                 if (end_time_index >= 0) {
-                    that.data.service_length.end_time[end_time_index]; // 结束时间的年份
+                    // that.data.service_length.end_time[end_time_index]; // 结束时间的年份
                     end_text = temp_end_time + '年03月31日';
                     end_time_format = temp_end_time + '-03-31';
                 }
@@ -359,7 +360,7 @@ Page({
                     "save_data.end_text": end_text, // 结束时间字符串 (服役年限)
                     "service_length.start_time": result.data.start_time, // 开始时间 (服役年限)
                     "save_data.administration_post_index": administration_post_index, // 行政职务 (职务)
-                    "save_data.expertise": expertise_index, // 专业技术 (职务)
+                    "save_data.expertise_index": expertise_index, // 专业技术 (职务)
                     "post_type": result.data.type, // 职务选中的类型 (0行政职务，1专业等级)
                     "save_data.leading_post_index": result.data.leading_post, // 领导职务 (职务)
                     "save_data.crack_glory_index": result.data.crack_glory, // 中央军委授予荣誉称号 (奖励计分)
