@@ -38,7 +38,7 @@ Page({
             if (result.code == 1) {
                 App._post('api/index/multiple', { data: JSON.stringify(data) }, function(result) {
                     if (result.code == 1) {
-                        that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count, type: result.data.type });
+                        that.setData({ username: result.data.name, phone: result.data.phone, place_index: result.data.anzhi, score: result.data.score, ranking: result.data.ranking, total_score: result.data.score_num, countNumn: result.data.count, zhiwu: parseInt(result.data.zhiwu), type: result.data.type });
 
                     }
                 }, function(result) {
